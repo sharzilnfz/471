@@ -116,7 +116,7 @@ graph LR
     User --- UC_Communicate
 
     %% Relationships - Includes
-    UC_Panic -.->|<<include>>| UC_NotifyLEO
+    UC_Panic -.->|"<<include>>"| UC_NotifyLEO
 
     %% Relationships - Volunteer
     Volunteer --- UC_Respond

@@ -120,7 +120,7 @@ graph LR
     UC_PayMobile -->|inherits| UC_Pay
     UC_PayCard -->|inherits| UC_Pay
     
-    UC_Borrow -.->|<<include>>| UC_Search
+    UC_Borrow -.->|"<<include>>"| UC_Search
     
     %% Optional: Customer Service interacts with the complaint filed
     CS --- UC_Complaint

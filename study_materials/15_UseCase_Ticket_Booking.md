@@ -76,8 +76,8 @@ graph LR
     UC5 --- PAYBD
 
     %% Use Case Relationships
-    UC3 -.->|<<include>>| UC4
-    UC7 -.->|<<extend>>| UC6
+    UC3 -.->|"<<include>>"| UC4
+    UC7 -.->|"<<extend>>"| UC6
 ```
 
 ## Step 5: Self-Check

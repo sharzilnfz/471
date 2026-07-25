@@ -121,13 +121,13 @@ graph LR
     Adviser --- UC_ApproveProp
 
     %% Includes
-    UC_Login -.->|<<include>>| UC_Validate
-    UC_Select -.->|<<include>>| UC_CheckSeats
-    UC_Select -.->|<<include>>| UC_CheckPre
-    UC_Pay -.->|<<include>>| UC_VerifyPay
+    UC_Login -.->|"<<include>>"| UC_Validate
+    UC_Select -.->|"<<include>>"| UC_CheckSeats
+    UC_Select -.->|"<<include>>"| UC_CheckPre
+    UC_Pay -.->|"<<include>>"| UC_VerifyPay
 
     %% Extends (Points from Extending to Base)
-    UC_Suggest -.->|<<extend>>| UC_Select
+    UC_Suggest -.->|"<<extend>>"| UC_Select
 
     %% Use Case Generalization
     UC_PayCard -->|inherits| UC_Pay

@@ -144,8 +144,8 @@ graph LR
     Admin --- UC_MngComp
 
     %% Use Case Relationships
-    UC_Reg -.->|<<include>>| UC_OTP
-    UC_Rate -.->|<<extend>>| UC_Pay
+    UC_Reg -.->|"<<include>>"| UC_OTP
+    UC_Rate -.->|"<<extend>>"| UC_Pay
     
     UC_Card -->|inherits| UC_Pay
     UC_Bkash -->|inherits| UC_Pay

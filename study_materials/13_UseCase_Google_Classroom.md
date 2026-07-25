@@ -63,13 +63,13 @@ graph LR
     UC10 --- ES
 
     %% Use Case Relationships
-    UC1 -.->|<<include>>| UC2
+    UC1 -.->|"<<include>>"| UC2
     
-    UC5 -.->|<<extend>>| UC4
-    UC6 -.->|<<extend>>| UC4
+    UC5 -.->|"<<extend>>"| UC4
+    UC6 -.->|"<<extend>>"| UC4
     
-    UC8 -.->|<<include>>| UC9
-    UC9 -.->|<<include>>| UC10
+    UC8 -.->|"<<include>>"| UC9
+    UC9 -.->|"<<include>>"| UC10
 ```
 
 ## Step 5: Self-Check

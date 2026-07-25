@@ -174,10 +174,10 @@ graph LR
     Member --- LogIn
     
     %% Include / Extend
-    BorrowBooks -.->|<<include>>| CheckValidity
-    BorrowBooks -.->|<<include>>| LogIn
-    SearchBooks -.->|<<include>>| LogIn
-    ReserveBooks -.->|<<extend>>| BorrowBooks
+    BorrowBooks -.->|"<<include>>"| CheckValidity
+    BorrowBooks -.->|"<<include>>"| LogIn
+    SearchBooks -.->|"<<include>>"| LogIn
+    ReserveBooks -.->|"<<extend>>"| BorrowBooks
 ```
 
 *(Note: To avoid crossing lines or making the diagram too messy, sometimes Log In is associated directly with actors, or shown as an include from major use cases. Both are valid in Mermaid, but remember the core logic of your requirements!)*

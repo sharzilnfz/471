@@ -73,10 +73,10 @@ graph LR
     %% Relationships
     UC2 -.->|inherits| UC1
     UC3 -.->|inherits| UC1
-    UC3 -.->|<<include>>| UC4
+    UC3 -.->|"<<include>>"| UC4
     
-    UC6 -.->|<<extend>>| UC5
-    UC9 -.->|<<include>>| UC10
+    UC6 -.->|"<<extend>>"| UC5
+    UC9 -.->|"<<include>>"| UC10
 ```
 
 ## Step 5: Self-Check

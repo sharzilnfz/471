@@ -87,9 +87,9 @@ graph TD
     PayFee --> End1((end))
 
     ChairEval -->|Yes| AmountDec{Amount size?}
-    AmountDec -->|< 10,000| ChairSign([Chairperson: Sign form])
+    AmountDec -->|"< 10,000"| ChairSign([Chairperson: Sign form])
     ChairSign --> APInput([Accounts Payable: Input to accounting system])
-    AmountDec -->|>= 10,000| ChairSignLarge([Chairperson: Sign form & explain reason])
+    AmountDec -->|">= 10,000"| ChairSignLarge([Chairperson: Sign form & explain reason])
     ChairSignLarge --> CFOEval{Reasonable?}
     
     CFOEval -->|No| StudentRejectDec

@@ -78,8 +78,8 @@ graph LR
     S --- UC_Complete
 
     %% Extend Relationships
-    UC_Payment -.->|<<extend>>| UC_Enroll
-    UC_Certificate -.->|<<extend>>| UC_Complete
+    UC_Payment -.->|"<<extend>>"| UC_Enroll
+    UC_Certificate -.->|"<<extend>>"| UC_Complete
 ```
 
 ## Step 5: Self-Check
