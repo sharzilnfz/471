@@ -114,8 +114,8 @@ graph TD
 ```mermaid
 graph TD
     Decision{Age?}
-    Decision -->|[Age < 18]| Minor([Block Access])
-    Decision -->|[Age >= 18]| Adult([Grant Access])
+    Decision -->|"[Age < 18]"| Minor([Block Access])
+    Decision -->|"[Age >= 18]"| Adult([Grant Access])
 ```
 
 ### 10. Object Nodes
