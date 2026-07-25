@@ -1,5 +1,23 @@
 # Use Case Diagram: BDEX Courier
 
+## 📋 Problem Statement
+
+> Analyzing the system for BDEX (a Bangladeshi courier service), following requirements were identified:
+> * There will be three types of users: Customer, First Officer and Manager
+> * Customers can initiate emergency delivery by providing item details
+> * Customer can choose between regular and express delivery
+> * Reward points are added into Customer account for express delivery
+> * First Officer can fill out courier form with necessary information
+> * For confidential and/or fragile item(s), First Officer must fill out insurance and policy documents during packaging, but it is not needed for general items.
+> * Manager can approve and sign off parcel item(s) for delivery
+> * Manager can contact Customer for delay in parcel arrival
+> * Manager can mark packages delivered after getting Customer confirmation
+>
+> *Design a use case diagram based on the above information.*
+
+---
+
+
 Welcome back! Let's tackle the BDEX Courier system. This one has some interesting conditional behaviors and multiple roles.
 
 ## Step 1: Identify the Actors

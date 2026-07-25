@@ -1,5 +1,18 @@
 # Activity Diagram Breakdown: GroceryDash
 
+## 📋 Problem Statement
+
+> In the digital age, GroceryDash, an online grocery delivery app, simplifies the process of getting essential items at your doorstep. Here's a scenario outlining the key steps in the GroceryDash ordering system:
+>
+> Users initiate the process by logging into the GroceryDash app, where they can browse and select their desired groceries. After selecting items, the order manager receives the request and checks for the availability of the chosen products.
+> If the items are available, the order manager proceeds with the checkout process. However, if certain items are out of stock, the system notifies the user and provides alternative suggestions. If the alternative suggestions are not according to the preference of the user, the user can remove the out-of-stock item or cancel the order itself.
+> Upon successful checkout and payment, the delivery manager is activated. The system checks the proximity of available delivery personnel within a specified radius.
+> If a delivery person is found, both the user and the delivery man are notified of the estimated delivery time and location. If both the delivery man and the user approve of the delivery time and location, only then the system updates the user's order status to 'Out for Delivery.' If any one doesn't approve of the delivery time, the system goes back to searching for a new delivery man.
+> After the 'Out for Delivery' status comes up for the user, the user can track the live location of the delivery personnel. Once the groceries have arrived in the specified location, both the user and delivery man have to approve of receiving the items and delivering the items for the order status to change into 'Delivered,' which then sends the user a confirmation message.
+
+---
+
+
 Alright, buckle up! This one is a bit of a marathon. The GroceryDash problem is complex and full of decisions, loops, and parallel approvals. We are going to take this slow and steady.
 
 ## Step 1: Read & Highlight

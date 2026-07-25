@@ -2,7 +2,7 @@
 
 Welcome back! In this tutorial, we are going to look at a slightly simpler scenario. This is a great exercise for building confidence and learning how to filter out "internal system behaviors" from actual user actions.
 
-## Problem Statement
+## 📋 Problem Statement
 This scenario focuses on a student enrolling in a course and completing coursework on an e-learning platform.
 The student accesses the E-Learning Platform and logs in with their account credentials. Then he/she can browse the course catalog and search for a course of interest. Students views the course details, including description, learning objectives, instructor information, and prerequisites (if any). When a student decides to enroll in the course, they may need to pay a fee or use a subscription depending on the platform's model. The E-Learning Platform processes the enrollment and grants the student access to the course content. The student accesses the course materials, which may include videos, lectures, readings, quizzes, and assignments. The student progresses through the course content at their own pace, completing learning activities. Students take quizzes and complete assignments as required by the course. The E-Learning Platform grades these assessments and provides feedback. The student interacts with the discussion forum or other communication tools within the course to ask questions and collaborate with other learners. Upon completing all course requirements, the student may receive a certificate of completion or a grade, depending on the platform and course structure.
 

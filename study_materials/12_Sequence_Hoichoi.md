@@ -1,5 +1,14 @@
 # Sequence Diagram Walkthrough: Hoichoi Streaming Service
 
+## 📋 Problem Statement
+
+> Watching a movie or documentary in hoichoi is always exciting. In a simple hoichoi site, after the user logs in using the credentials, there is a simple dashboard containing the suggested movie or Tv series along with a search bar at the top to search for any item. The user can search for the contents in three ways. They can search by a content name like "Mahanagar", they can search by the name of an Artist or Director like "Mostafa Sarwar Faruki," and finally they can search by a genre like "Crime Thriller." For the first case, the hoichoi search manager fetches a single entry along with the metadata from the hoichoi server and displays it to the user as a tile along with the metadata. For the second case, a list of content involving the Artist or Director is showed (not as tiles) to the users after being fetched from the server. And finally, the relevant contents of a genre search are offered as tiles (without the metadata) for the user to select, however the search manager fetches the metadata from server for later use. All user communication with the search manager is relayed by the web interface of hoichoi.
+>
+> *Draw a sequence diagram based on search system of hoichoi as described above.*
+
+---
+
+
 ## Step 1: Identify the Objects
 From the problem description, we have:
 - **User**: The person searching for content.

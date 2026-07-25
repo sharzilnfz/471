@@ -1,5 +1,24 @@
 # Use Case Diagram: Assignment Management System
 
+## 📋 Problem Statement
+
+> Analyzing the system for student assignment management, the following requirements were identified:
+> * There can be three types of users: Teacher, Teaching Assistant (TA) and Student
+> * Teacher can add new assignments
+> * Teacher can edit/remove an existing assignment
+> * TA can edit/remove an existing assignment
+> * Student can submit an assignment
+> * Student can edit his submission (before due date)
+> * TA can assign grade to submission (after due date)
+> * Teacher can modify grade after graded by the TA
+> * Student can view grade
+> * Student can generate reports of his submissions after graded by the TA
+>
+> *Design a Use Case diagram based on the above information.*
+
+---
+
+
 Welcome to the Assignment Management System Use Case exercise! Let's break down this problem step-by-step and learn how to map it into a complete Use Case Diagram.
 
 ## Step 1: Identify the Actors

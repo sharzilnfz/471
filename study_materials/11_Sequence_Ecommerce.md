@@ -1,5 +1,21 @@
 # Sequence Diagram Walkthrough: Ecommerce System
 
+## 📋 Problem Statement
+
+> Ecommerce has been booming in Bangladesh, and especially with the pandemic, the demand for it has exponentially increased. A general case ecommerce runs as follows:
+> 1. After a customer visits the site, they search for a product by typing its name, which is passed to the SearchEngine
+> 2. The SearchEngine then fetches the products from the ProductsDatabase and serializes them in accordance with the relevance of the searched keywords and returns them to the customer
+> 3. The customer selects an item which takes the user to the ProductPage
+> 4. From the ProductPage, the customer adds the item to their cart which sends a request to the CustomerCart
+> 5. After receiving the request, CustomerCart sends a request to the ProductsDatabase to check if the item is in stock, if the item is in stock, the product gets added to the CustomerCart otherwise an error is shown
+> 6. Finally, the customer selects to check out, which sends a request to the CartCheckout where the customer has to enter their full name, email address, phone number and delivery address
+> 7. If all the information has been entered correctly, a success message is shown, otherwise an error message is shown
+>
+> *Draw the sequence diagram for the above scenario.*
+
+---
+
+
 ## Step 1: Identify the Objects
 Based on the scenario, the entities are:
 - **Customer**: The user of the site.

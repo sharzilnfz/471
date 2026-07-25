@@ -2,7 +2,7 @@
 
 Hello there! Welcome back to our UML studies. Today, we're going to break down a problem about an online book borrowing system called **Bookflix**. We'll extract the actors, use cases, and relationships step by step. Grab your notebook, and let's dive in!
 
-## Problem Statement
+## 📋 Problem Statement
 Bookflix is an online book borrowing system. In this system, a user can view a list of books that are available for borrowing. They have to search for the books by author or book name first. They can also read snippets before borrowing a book. The users can rate the books and also write reviews about the books they borrow. This system has two types of subscription service: monthly and yearly. There are two types of payment methods in this system: mobile banking and card. A user will be upgraded to a premium user, if he/she avails of the yearly package. Premium users can view available slots to book for online sessions with the book authors. The authors will set the date and time of the online sessions. The user will receive notification about best-selling books that are available. Users can turn on notifications for their desired books to know their availability. They will also get a notification about the due payments. Customer service will be available for the users to get help and file complaints. Customer service will provide feedback and take necessary actions upon the complaints. *(Note: You don't have to draw any authentication related use cases).*
 
 ---

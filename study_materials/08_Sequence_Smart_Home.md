@@ -1,5 +1,14 @@
 # Sequence Diagram Practice: Smart Home Automation
 
+## 📋 Problem Statement
+
+> Design a smart-home automation system that integrates a CPU, sensors, displays, sound systems, and mobile devices to provide automation and security.
+> After waking, the user can ask the CPU for scheduled tasks, where tasks exceeding five are sent to the user's mobile, while tasks five or fewer are displayed on the screen. At 10:00 AM, before leaving the house, the CPU asks the user to set a fingerprint via the sensor, followed by setting a PIN to the CPU. Upon returning, the user provides a fingerprint and PIN.
+> If the fingerprint is matched, the sensor sends the fingerprint-matched message to the CPU, and the CPU checks the PIN. In case of the correct pin, a welcome message is shown in the display; otherwise, the user receives a resetting instruction and resets the pin. However, if an unrecognized fingerprint is detected, the CPU receives a fingerprint-mismatched signal and sends an intruder alert to the user's mobile.
+
+---
+
+
 Let's break down this complex logical problem step-by-step.
 
 ## Step 1: Identify the Objects

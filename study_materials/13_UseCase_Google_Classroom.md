@@ -1,5 +1,14 @@
 # Use Case Diagram: Google Classroom
 
+## 📋 Problem Statement
+
+> Google Classroom is a teacher/student platform, which Google designed for the way teachers and students think and work. It converts traditional paper-based teaching mechanisms to an online paperless one. It all starts with the creation of a classroom by a teacher. Students can easily connect to a classroom using a unique code created for each classroom. It also allows the teachers to create and add materials to assignments, such as YouTube videos, a Google Forms survey, and other items from Google Drive. In this pandemic situation, it has done more for the teacher-student community. Teachers can set graded assignments. Due date setting facility is also offered for the assignments. Once the assignment is posted, students can solve those and submit them online. On completion of submission, teachers can grade and return the result to the students. The updates of the events are also emailed to corresponding email addresses which are used while connecting to the classroom.
+>
+> *Design a Use-case diagram based on the above information.*
+
+---
+
+
 Hey there! Let's break down this Google Classroom problem together. We'll extract the actors, use cases, and relationships step-by-step to build a solid Use Case Diagram.
 
 ## Step 1: Identify the Actors

@@ -1,5 +1,12 @@
 # Sequence Diagram Walkthrough: Online Examination System
 
+## 📋 Problem Statement
+
+> A student logs into an online examination system to take a timed multiple-choice test. First, the student enters their username and password. The system checks if the credentials are valid; if not, it asks the student to try again (this can repeat up to 3 times). If successful, the system shows the list of available tests. The student selects a test and starts it. The system then starts a timer (which updates itself every second) and loads the first question. If all the questions are not seen, for each question, the student can either answer it, skip it, or mark it for review. If the student answers, the system saves the response immediately. If they skip, the system moves to the next question. If they mark for review, the system adds the question to a separate review list and also goes to the next question. If the student clicks "End Test" before time is up, the system shows a confirmation box with two choices: confirm or cancel. If confirmation is selected, the test ends early. If cancellation is selected, the student returns to the test. When the timer runs out or the student confirms the end, the system saves all answers, submits the test. A result generator object is then created by the system, which calculates the score using its grading method (one question at a time until all are done), then sends the result back to the system. The system then destroys the result generator. Finally, the system shows the result to the student.
+
+---
+
+
 ## Step 1: Identify the Objects
 From the problem description, we can extract the main entities participating in the process:
 - **Student**: The actor taking the exam.

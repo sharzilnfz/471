@@ -1,5 +1,15 @@
 # Use Case Diagram: Community Robbery Prevention Platform
 
+## 📋 Problem Statement
+
+> A community robbery prevention and response platform is being developed to tackle the growing issue of robbery incidents in Bangladesh.
+> Registered users can log in to the platform to report robbery incidents by providing details or evidence such as photos or videos. They can also request immediate help through a panic button. The panic button works as an emergency alert and notifies a law enforcement officer. Some users who act as volunteers might respond to emergency alerts to help the users if they are available. Users will get notified if volunteers have responded to the alert. After providing assistance volunteers can update the status of incidents and can communicate with law enforcement officers. Any user can apply to be a volunteer, and administrator will verify and approve the request. Law enforcement officers can review reported incidents and update the progress of investigations. They can also communicate with both users and volunteers for coordinated actions. Moreover, users can view robbery-prone areas on an interactive map and receive safety tips. Administrators of the platform oversee the entire system by managing user and volunteer registrations. Additionally, the system includes AI-powered analytics reports which include prediction of high-risk robbery zones based on incident data and preventive suggestions.
+>
+> *Design a Use Case diagram based on the above scenario.*
+
+---
+
+
 This is a complex scenario with multiple actors, shared use cases, and secondary systems. Let's tackle it methodically.
 
 ## Step 1: Identify the Actors

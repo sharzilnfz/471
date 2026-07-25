@@ -1,5 +1,22 @@
 # Activity Diagram: Pentagon Security
 
+## 📋 Problem Statement
+
+> The Pentagon is working on a new security protocol to ensure that no one other than no Russian spy can infiltrate and get access to classified materials. The protocol set is as follows:
+> 1. The user must first enter their password on the password kiosk.
+> 2. The password kiosk will send the hash of the password to the basic credentials module (which is a part of the credentials system) and prompt the user to enter their YubiKey.
+> 3. The basic credentials module takes the hash and performs the following simultaneously:
+>    1. It matches the hash against known passwords, and if there is a match, then it gets the user uuid, otherwise it generates a false uuid.
+>    2. Generates a set of random numbers.
+> 4. After the uuid and the random numbers are generated, the basic credentials module concatenates them to create a string and sends it back to the password kiosk.
+> 5. The password kiosk will then use the YubiKey and the string to generate a hash.
+> 6. If the hash is under a specific limit, the user is allowed access, otherwise the user is declined access.
+>
+> *Design the activity diagram based on the above scenario.*
+
+---
+
+
 Welcome to the problem-solving guide for the Pentagon Security protocol! We'll use the 5-step method to understand how to model parallel processes (forks and joins) in a UML Activity Diagram.
 
 ## Step 1: Read & Highlight

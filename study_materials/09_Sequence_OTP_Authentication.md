@@ -1,5 +1,15 @@
 # Sequence Diagram Practice: OTP Authentication
 
+## 📋 Problem Statement
+
+> The following scenario shows a successful authentication of a client using the mobile OTP solution.
+> The authentication is initiated when a user requests access to a service that requires authentication. The SP notifies the authenticator that a user needs to be authenticated. The session is redirected to the authenticator and the user is asked to enter a username. The username is sent to the AS, which gets the secret key for this client and, from this generates an OTP. The OTP is also based on a challenge. A different challenge is used every time so the generated OTP is always changing. At last a message authentication code (MAC) based on the secret key is calculated over the OTP. The AS sends the triplet (challenge, MAC, OTP) to the Authenticator which relays the challenge and the MAC to the client. Upon receiving the challenge, the client calculates the OTP. Then it calculates the MAC and compares it to the one received from the Authenticator. If the values match the client can authenticate the AS since the AS has proved that it is in possession of the shared key. The client then sends the OTP back to the Authenticator. If the MAC is wrong, the authentication is aborted. The Authenticator compares the OTP with the one received from the AS and if they match, notifies the SP that the client is authenticated. A mutual authentication of the client and server has been achieved and the session is redirected back to the SP which grants the user access to the service.
+>
+> *Draw a sequence diagram based on the above information.*
+
+---
+
+
 Let's model this security protocol sequence diagram.
 
 ## Step 1: Identify the Objects

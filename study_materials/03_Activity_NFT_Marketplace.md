@@ -1,5 +1,14 @@
 # Activity Diagram: NFT Marketplace
 
+## 📋 Problem Statement
+
+> Non-Fungible Tokens (NFT) are an application of blockchains where the proof of ownership of an asset is placed on the blockchain network and the owner of the asset has the hash of the block stored in a digital wallet. First the creator of a NFT collection opens up a crypto wallet and then logs into it, if the creator already has a wallet, then s/he just logs in. After that, the creator connects his/her wallet to a marketplace, during the connection process, the marketplace will check if the wallet is already connected or not, if the wallet was not connected, then the wallet will be added to the database and a confirmation message will be sent, otherwise just the confirmation message will be sent. After connecting the wallet, the creator will request to add the NFT collection to the marketplace. The marketplace will check the collection and generate a minting cost in cryptocurrency and then will check if the wallet contains sufficient cryptocurrency to mint (add) the collection. If sufficient cryptocurrency is not present, the request will be denied. If sufficient cryptocurrency is present, then the marketplace will start the minting process. In the minting process, requests are sent to the blockchain network and the remote storage network. The blockchain network mines the block and then validates the block, the remote storage network stores the collection on a server. After both these processes are complete, the creator is sent a notification of the success.
+>
+> *Construct an activity diagram from the above scenario.*
+
+---
+
+
 Welcome to the problem-solving guide for the NFT Marketplace process! We'll use the 5-step method to model a flow that contains sequential decisions followed by parallel execution.
 
 ## Step 1: Read & Highlight

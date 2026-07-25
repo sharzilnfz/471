@@ -1,5 +1,14 @@
 # Activity Diagram Breakdown: Sarah the Editor
 
+## 📋 Problem Statement
+
+> Sarah also works as a part-time editor. She logs into an app with her email and password where she is already registered and she reviews any book proposal she gets. She can choose to accept a proposal after analyzing the proposal or reject the proposal. If the project is rejected it will notify the agent and end the scenario. The agent also uses the same app and is registered as an agent with a different interface where he/she can send book proposals to enlisted editors and contracts to enlisted writers. Due to Sarah accepting the proposal, the agent can offer a contract to the writer. The writer analyzes the offer and asks the agent's opinion on the offer. If both are positive to work on it, the writer will notify Sarah, who is the editor, about accepting it and then begin his/her writing.
+>
+> *Design an activity diagram from the above scenario.*
+
+---
+
+
 Hello! In this problem, we're looking at a system heavily driven by interactions between different people. It's a great exercise in visualizing how control passes back and forth between different roles.
 
 ## Step 1: Read & Highlight

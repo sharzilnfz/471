@@ -1,5 +1,14 @@
 # Activity Diagram Breakdown: TeaLeaves Order Management
 
+## 📋 Problem Statement
+
+> Company TeaLeaves has recently adopted a new order management system for handling production requests. The sales representative can place a new order for production. If special materials are required for producing the new order, then an order is placed for special materials with the supplier. Otherwise, if no special materials are required for producing the new order or the supplier has finished providing the special materials, the order is added to the production list. Afterward, the order is scheduled for production. Once the order is confirmed, a letter is generated to the sales representative and to the manager.
+>
+> *Draw the activity diagram for the above scenario.*
+
+---
+
+
 Welcome back! Today we are tackling a straightforward problem to build our confidence with Activity Diagrams. We'll walk through the process of ordering tea and materials. Let's dive in!
 
 ## Step 1: Read & Highlight

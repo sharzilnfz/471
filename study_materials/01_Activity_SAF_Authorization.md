@@ -1,5 +1,14 @@
 # Activity Diagram: SAF Authorization
 
+## 📋 Problem Statement
+
+> Student Assistance Fund (SAF) authorization has a number of steps in its approval process. A SAF authorization form is used in most universities to approve funding for students to aid their studies. Suppose a student fills out a blank form and sends it to his or her departmental chairperson for a signature. If the amount of funds requested by the student is small (under Tk. 10,000), then the chairperson signs the form and routes it to accounts payable to be input into the accounting system. The system cuts a check that is sent to the student for the right amount, and after the check is cashed, the form is filed away with the canceled check. If the check is not cashed within 30 days, the form expires. When the amount of the requested fund is large (over Tk. 10,000), the chairperson signs the form and sends it to the chief financial officer along with a paragraph explaining the reason for the grant, and the chief financial officer will sign the form and pass it along to accounts payable. Both the chairperson and the chief financial officer can reject the SAF authorization form if they do not feel that the reasons for seeking funding are reasonable. In this case, the student can change the form to include more explanation or decide to pay the entire fee.
+>
+> *Design an activity diagram based on the above information.*
+
+---
+
+
 Welcome to the problem-solving guide for the Student Assistance Fund (SAF) authorization process! We'll use the 5-step method to build real intuition about how to translate a text description into a UML Activity Diagram.
 
 ## Step 1: Read & Highlight

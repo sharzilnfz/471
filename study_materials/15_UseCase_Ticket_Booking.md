@@ -1,5 +1,23 @@
 # Use Case Diagram: Ticket Booking
 
+## 📋 Problem Statement
+
+> Analyzing the system for online ticket booking, the following requirements were identified:
+> * There can be three types of passengers: General, Premium and New
+> * Passenger can register into the system with his – NID, Name, Email, Mobile Number, and Password
+> * Passenger can login into the system with his email and password
+> * Passenger can buy tickets
+> * Tickets should be confirmed by the System Admin
+> * Passenger can pay the ticket price online after being confirmed
+> * Online payment should be using the "PAYBD" payment gateway
+> * Passenger can cancel a booking
+> * Passenger can request for return money for the canceled booking
+>
+> *Design a Use Case diagram based on the above information.*
+
+---
+
+
 Hello again! This Ticket Booking system is a classic example of actor generalization and secondary actors. Let's break it down!
 
 ## Step 1: Identify the Actors

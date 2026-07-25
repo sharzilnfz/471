@@ -1,5 +1,15 @@
 # Use Case Diagram: Course Management System
 
+## 📋 Problem Statement
+
+> Suppose you have been hired to design a course management system. The requirements for the system are as follows:
+> Two types of students will use this system, BSc, and MSc. Students will be able to log in to the system using a username and password. The system will check whether the credentials are valid and will give an error message if they are incorrect. Students will be able to select courses they want to complete next semester. The system will check whether the course has remaining seats and if the student has completed all pre-requisite courses to take the course. The system might suggest additional courses to the students when taking a course. After a student has completed selecting courses then he/she might request for advising, and an adviser will approve the advising request. Students can view their routine and grade sheet. BSc students can add project proposals whereas MSc students can add thesis proposals and those will be approved by the advisor. Students can also make payments. Payments can be made via card or bank transfer; payment must be verified by the system.
+>
+> *Design a Use Case Diagram based on the above information.*
+
+---
+
+
 This problem is a masterclass in handling inheritance (generalization) and relationships (`<<include>>` vs `<<extend>>`). 
 
 ## Step 1: Identify the Actors

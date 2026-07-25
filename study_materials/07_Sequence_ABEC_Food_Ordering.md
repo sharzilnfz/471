@@ -1,5 +1,14 @@
 # Sequence Diagram Practice: ABEC Food Ordering
 
+## 📋 Problem Statement
+
+> ABEC University's permanent campus has multiple restaurants inside the campus premises. So the university has developed a system that helps students order food from those restaurants. To use the system, a student must first visit the site and search for a food item, which is then passed to the SearchEngine. The SearchEngine then fetches the RestaurantPages from RestaurantDatabase which sells that particular food item, serializes them, and returns them to the student. The student then selects the RestaurantPage. From the RestaurantPage, the student adds the item to their cart which sends a request to the StudentCart. After receiving the request, StudentCart adds the item. The student may again search for more than one food item, which will be passed to the SearchEngine. In this case, the previous steps will be repeated. However, multiple food items can be added to the StudentCart if all of them belong to the same restaurant. Finally, when the student decides to order all the food items, he/she selects to check out which sends a request to the CartCheckout where the student has to enter his/her student ID, gsuite email address, phone number, and select the payment method. When all the information has been given, the system confirms the order and shows the estimated delivery time.
+>
+> *Draw the sequence diagram for the above scenario.*
+
+---
+
+
 Let's break down this sequence diagram problem step-by-step to build our intuition.
 
 ## Step 1: Identify the Objects
