@@ -42,29 +42,23 @@ Look at how the flow crosses the swimlane boundaries. This perfectly illustrates
 
 ```mermaid
 graph TD
-    ((start)) --> A1
+    Start((start)) --> A1
     
-    subgraph Agent
-        A1[Send book proposal to Editor]
-        A2[Receive rejection notification]
-        A3[Offer contract to Writer]
-        A4[Discuss contract opinion with Writer]
-    end
+    A1(["Agent: Send book proposal to Editor"])
+    A2(["Agent: Receive rejection notification"])
+    A3(["Agent: Offer contract to Writer"])
+    A4(["Agent: Discuss contract opinion with Writer"])
     
-    subgraph Sarah Editor
-        S1[Log into app]
-        S2[Review book proposal]
-        D_Sarah{Accept or Reject?}
-        S3[Receive acceptance notification]
-    end
+    S1(["Editor: Log into app"])
+    S2(["Editor: Review book proposal"])
+    D_Sarah{"Accept or Reject?"}
+    S3(["Editor: Receive acceptance notification"])
     
-    subgraph Writer
-        W1[Analyze contract offer]
-        W2[Ask Agent's opinion]
-        D_Both{Both positive?}
-        W3[Notify Editor of acceptance]
-        W4[Begin writing]
-    end
+    W1(["Writer: Analyze contract offer"])
+    W2(["Writer: Ask Agent's opinion"])
+    D_Both{"Both positive?"}
+    W3(["Writer: Notify Editor of acceptance"])
+    W4(["Writer: Begin writing"])
     
     %% Agent starts by sending proposal
     A1 --> S1
@@ -75,7 +69,7 @@ graph TD
     
     %% Rejection Path
     D_Sarah -->|Reject| A2
-    A2 --> ((end1[End]))
+    A2 --> End1((end))
     
     %% Acceptance Path
     D_Sarah -->|Accept| A3
@@ -90,10 +84,10 @@ graph TD
     D_Both -->|Yes| W3
     W3 --> S3
     W3 --> W4
-    W4 --> ((end2[End]))
+    W4 --> End2((end))
     
     %% If not positive, it ends (implied)
-    D_Both -->|No| ((end3[End]))
+    D_Both -->|No| End3((end))
 ```
 
 ## Step 5: Self-Check

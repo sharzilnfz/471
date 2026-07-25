@@ -1,0 +1,68 @@
+﻿1. Google Classroom is a teacher/student platform, which Google designed for the way teachers and students think and work. It converts traditional paper-based teaching mechanisms to an online paperless one. It all starts with the creation of a classroom by a teacher. Students can easily connect to a classroom using a unique code created for each classroom. It also allows the teachers to create and add materials to assignments, such as YouTube videos, a Google Forms survey, and other items from Google Drive. In this pandemic situation, it has done more for the teacher-student community. Teachers can set graded assignments. Due date setting facility is also offered for the assignments. Once the assignment is posted, students can solve those and submit them online. On completion of submission, teachers can grade and return the result to the students. The updates of the events are also emailed to corresponding email addresses which are used while connecting to the classroom. 
+Design a Use-case diagram based on the above information. (solved in class)
+------------------------------------------------------------------------------------------------------------------------------------
+2. Analyzing the system for BDEX (a Bangladeshi courier service), following requirements were identified: 
+* There will be three types of users: Customer, First Officer and Manager
+* Customers can initiate emergency delivery by providing item details 
+* Customer can choose between regular and express delivery 
+* Reward points are added into Customer account for express delivery 
+* First Officer can fill out courier form with necessary information 
+* For confidential and/or fragile item(s), First Officer must fill out insurance and policy documents during packaging, but it is not needed for general items. 
+* Manager can approve and sign off parcel item(s) for delivery 
+* Manager can contact Customer for delay in parcel arrival 
+* Manager can mark packages delivered after getting Customer confirmation
+ Design a use case diagram based on the above information. 
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+3. Analyzing the system for online ticket booking, the following requirements were identified
+
+
+* There can be three types of passengers: General, Premium and New 
+* Passenger can register into the system with his – NID, Name, Email, Mobile Number, and Password 
+* Passenger can login into the system with his email and password 
+* Passenger can buy tickets
+* Tickets should be confirmed by the System Admin 
+* Passenger can pay the ticket price online after being confirmed 
+* Online payment should be using the “PAYBD” payment gateway 
+* Passenger can cancel a booking 
+* Passenger can request for return money for the canceled booking  
+
+
+Design a Use Case diagram based on the above information. (Solved in class)
+------------------------------------------------------------------------------------------------------------------------------------
+4. Analyzing the system for student assignment management, the following requirements  were identified 
+* There can be three types of users: Teacher, Teaching Assistant (TA) and Student 2. Teacher can add new assignments 
+* Teacher can edit/remove an existing assignment 
+* TA can edit/remove an existing assignment 
+* Student can submit an assignment 
+* Student can edit his submission (before due date) 
+* TA can assign grade to submission (after due date) 
+* Teacher can modify grade after graded by the TA 
+* Student can view grade 
+* Student can generate reports of his submissions after graded by the TA
+Design a Use Case diagram based on the above information.
+------------------------------------------------------------------------------------------------------------------------------------
+5. A community robbery prevention and response platform is being developed to tackle the growing issue of robbery incidents in Bangladesh. 
+Registered users can log in to the platform to report robbery incidents by providing details or evidence such as photos or videos. They can also request immediate help through a panic button. The panic button works as an emergency alert and notifies a law enforcement officer. Some users who act as volunteers might respond to emergency alerts to help the users if they are available. Users will get notified if volunteers have responded to the alert. After providing assistance volunteers can update the status of incidents and can communicate with law enforcement officers. Any user can apply to be a volunteer, and administrator will verify and approve the request. Law enforcement officers can review reported incidents and update the progress of investigations. They can also communicate with both users and volunteers for coordinated actions. Moreover, users can view robbery-prone areas on an interactive map and receive safety tips. Administrators of the platform oversee the entire system by managing user and volunteer registrations. Additionally, the system includes AI-powered analytics reports which include prediction of high-risk robbery zones based on incident data and preventive suggestions. 
+Now Design a Use Case diagram based on the above scenario.
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+6. Suppose you have been hired to design a course management system. The requirements for the system are as follows:
+Two types of students will use this system, BSc, and MSc. Students will be able to log in to the system using a username and password. The system will check whether the credentials are valid and will give an error message if they are incorrect. Students will be able to select courses they want to complete next semester. The system will check whether the course has remaining seats and if the student has completed all pre-requisite courses to take the course. The system might suggest additional courses to the students when taking a course. After a student has completed selecting courses then he/she might request for advising, and an adviser will approve the advising request. Students can view their routine and grade sheet. BSc students can add project proposals whereas MSc students can add thesis proposals and those will be approved by the advisor. Students can also make payments. Payments can be made via card or bank transfer; payment must be verified by the system.
+Now, Design a Use Case Diagram based on the above information.
+------------------------------------------------------------------------------------------------------------------------------------
+7. Bookflix is an online book borrowing system. In this system, a user can view a list of books that are available for borrowing. They have to search for the books by author or book name first. They can also read snippets before borrowing a book. The users can rate the books and also write reviews about the books they borrow. This system has two types of subscription service: monthly and yearly. There are two types of payment methods in this system: mobile banking and card. A user will be upgraded to a premium user, if he/she avails of the yearly package. Premium users can view available slots to book for online sessions with the book authors. The authors will set the date and time of the online sessions. The user will receive notification about best-selling books that are available. Users can turn on notifications for their desired books to know their availability. They will also get a notification about the due payments. Customer service will be available for the users to get help and file complaints. Customer service will provide feedback and take necessary actions upon the complaints.
+Design a use case diagram based on the above scenario. You don’t have to draw any authentication related use cases. (Solved in class)
+------------------------------------------------------------------------------------------------------------------------------------
+8. This scenario focuses on a student enrolling in a course and completing coursework on an e-learning platform.
+The student accesses the E-Learning Platform and logs in with their account credentials. Then he/she can browse the course catalog and search for a course of interest. Students views the course details, including description, learning objectives, instructor information, and prerequisites (if any). When a student decides to enroll in the course, they may need to pay a fee or use a subscription depending on the platform's model. The E-Learning Platform processes the enrollment and grants the student access to the course content. The student accesses the course materials, which may include videos, lectures, readings, quizzes, and assignments. The student progresses through the course content at their own pace, completing learning activities.
+Students take quizzes and complete assignments as required by the course. The E-Learning Platform grades these assessments and provides feedback.
+The student interacts with the discussion forum or other communication tools within the course to ask questions and collaborate with other learners. Upon completing all course requirements, the student may receive a certificate of completion or a grade, depending on the platform and course structure.
+Now design a Use case diagram based on the above information. (Solved in class)
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+9. Quick Fix Mechanix is a system developed with the aim of easing the hassles of modern-day car servicing problems by providing proper car care solutions that can be monitored remotely from anywhere. The users of the system include Regular Customers, Premium Customers and Service Providers. All the users of the system will first register and then login to the system. Registration will be verified through OTP. Customers will be able to choose a specific service (cleaning, repairing, health checkup) from the garage of his/her choice. The customer can choose a service type like home or in-garage service. If the service provider (garage) accepts a service request, the customer will be able to monitor the progress of the service. After the completion of the service, the consumer will be able to complete the payment transaction (using card or bkash) through the system and optionally can also provide rating on the services. The customer will be able to search for nearby available parking slots. He/she can also request for tow-truck service using an emergency button. Nearby garages can accept the request and send a tow-truck. Regular customers can upgrade to premium subscription for a monthly charge. Premium customers will get discounts on various services and will get notifications for offers on the services. When the next service is due, he/she will receive notification from the system. Consumers will be able to fill up relative insurance papers through the system. The system admin manages insurance forms. Customers can also register complaints upon receiving a service. The admin manages complaints upon receiving any complaints.
+Now design a use case diagram based on the above information.

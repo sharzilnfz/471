@@ -68,65 +68,34 @@ Let's break down the problem text and see what structural elements we can extrac
 
 ```mermaid
 graph TD
-    ((start)) --> FillForm
+    Start((start)) --> FillForm([Student: Fill out blank form])
 
-    subgraph Student
-        FillForm[Fill out blank form]
-        StudentRejectDec{Update or Pay?}
-        UpdateForm[Update form with more explanation]
-        PayFee[Pay entire fee]
-        CashCheck[Cash check]
-    end
-
-    subgraph Chairperson
-        ChairEval{Reasonable?}
-        ChairSign[Sign form]
-        AmountDec{Amount size?}
-        ChairSignLarge[Sign form & explain reason]
-    end
-
-    subgraph CFO
-        CFOEval{Reasonable?}
-        CFOSign[Sign form]
-    end
-
-    subgraph Accounts Payable
-        APInput[Input to accounting system]
-    end
-
-    subgraph Accounting System
-        CutCheck[Cut check]
-        FilingDec{Check cashed or 30 days passed?}
-        FileForm[File form with canceled check]
-        ExpireForm[Expire form]
-    end
-
-    FillForm --> ChairEval
-    ChairEval -->|No| StudentRejectDec
-    StudentRejectDec -->|Update| UpdateForm
+    FillForm --> ChairEval{Reasonable?}
+    ChairEval -->|No| StudentRejectDec{Update or Pay?}
+    StudentRejectDec -->|Update| UpdateForm([Student: Update form with more explanation])
     UpdateForm --> ChairEval
-    StudentRejectDec -->|Pay| PayFee
-    PayFee --> ((end1))
+    StudentRejectDec -->|Pay| PayFee([Student: Pay entire fee])
+    PayFee --> End1((end))
 
-    ChairEval -->|Yes| AmountDec
-    AmountDec -->|< 10,000| ChairSign
-    ChairSign --> APInput
-    AmountDec -->|>= 10,000| ChairSignLarge
-    ChairSignLarge --> CFOEval
+    ChairEval -->|Yes| AmountDec{Amount size?}
+    AmountDec -->|< 10,000| ChairSign([Chairperson: Sign form])
+    ChairSign --> APInput([Accounts Payable: Input to accounting system])
+    AmountDec -->|>= 10,000| ChairSignLarge([Chairperson: Sign form & explain reason])
+    ChairSignLarge --> CFOEval{Reasonable?}
     
     CFOEval -->|No| StudentRejectDec
-    CFOEval -->|Yes| CFOSign
+    CFOEval -->|Yes| CFOSign([CFO: Sign form])
     CFOSign --> APInput
 
-    APInput --> CutCheck
-    CutCheck --> FilingDec
+    APInput --> CutCheck([Accounting System: Cut check])
+    CutCheck --> FilingDec{Check cashed or 30 days passed?}
     
-    FilingDec -->|Cashed by student| CashCheck
-    CashCheck --> FileForm
-    FileForm --> ((end2))
+    FilingDec -->|Cashed by student| CashCheck([Student: Cash check])
+    CashCheck --> FileForm([Accounting System: File form with canceled check])
+    FileForm --> End2((end))
     
-    FilingDec -->|30 days pass| ExpireForm
-    ExpireForm --> ((end3))
+    FilingDec -->|30 days pass| ExpireForm([Accounting System: Expire form])
+    ExpireForm --> End3((end))
 ```
 
 ## Step 5: Self-Check

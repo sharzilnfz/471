@@ -145,8 +145,8 @@ Go through the problem sentence by sentence and color-code or tag the elements:
 ### Step 2: LIST the building blocks
 Create a quick mental or physical table to organize what you found.
 | Actors (Green) | Actions (Blue) | Decisions (Yellow) | Parallel? (Red) | End States (Purple) |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| -------------- | -------------- | ------------------ | --------------- | ------------------- |
+| ...            | ...            | ...                | ...             | ...                 |
 
 ### Step 3: CHAIN the actions
 Ignore the actors for a moment. Just connect the actions (Blue) in chronological order. Insert your Decisions (Yellow) and Forks/Joins (Red) where appropriate. Create a single, logical flow from Start to End.
@@ -191,9 +191,9 @@ Read the original text again, tracing your finger along the diagram.
 - 🟪 End conditions: serving the drink.
 
 ### Step 2: LIST the building blocks
-| Actors (Green) | Actions (Blue) | Decisions (Yellow) | Parallel? (Red) | End States (Purple) |
-|---|---|---|---|---|
-| Customer, Barista, Machine | Order coffee, Check temp, Steam milk, Brew espresso, Blend ice, Serve drink | Hot or Cold? | Steam milk AND Brew espresso | Serve drink |
+| Actors (Green)             | Actions (Blue)                                                              | Decisions (Yellow) | Parallel? (Red)              | End States (Purple) |
+| -------------------------- | --------------------------------------------------------------------------- | ------------------ | ---------------------------- | ------------------- |
+| Customer, Barista, Machine | Order coffee, Check temp, Steam milk, Brew espresso, Blend ice, Serve drink | Hot or Cold?       | Steam milk AND Brew espresso | Serve drink         |
 
 ### Step 3: CHAIN the actions (Mental Draft)
 Start -> Order -> Check Temp -> 
@@ -204,42 +204,37 @@ If Cold -> Blend Ice -> Merge -> Serve -> End
 We have three actors: Customer, Barista, Machine. Let's arrange them and place the actions.
 
 ### Step 5: VERIFY & The Complete Diagram
-- Customer orders? Yes.
-- Barista checks temp? Yes.
-- Hot: milk and espresso happen simultaneously (fork/join across lanes)? Yes.
-- Cold: barista blends ice? Yes.
-- Both end with serving? Yes (handled via a Merge node before serving).
+- ✅ Customer orders? Yes.
+- ✅ Barista checks temp? Yes.
+- ✅ Hot: milk and espresso happen simultaneously (fork/join across lanes)? Yes.
+- ✅ Cold: barista blends ice? Yes.
+- ✅ Both end with serving? Yes (handled via a Merge node before serving).
 
 ```mermaid
 graph TD
-    subgraph Customer
-        Start((Start)) --> Order([Order Coffee])
-        Receive([Receive Drink]) --> End(((End)))
-    end
+    Start((Start)) --> Order([Customer: Order Coffee])
 
-    subgraph Barista
-        Order --> Check{Hot or Cold?}
-        
-        %% Hot Path
-        Check -->|[Hot]| Fork1[=== Fork ===]
-        Fork1 --> Steam([Steam Milk])
-        
-        %% Cold Path
-        Check -->|[Cold]| Blend([Blend Ice])
-        
-        %% Join & Merge
-        Steam --> Join1[=== Join ===]
-        
-        Blend --> Merge1{ }
-        Join1 --> Merge1
-        
-        Merge1 --> Serve([Serve Drink])
-        Serve --> Receive
-    end
+    Order --> Check{Hot or Cold?}
 
-    subgraph Machine
-        %% Parallel task for Hot Path
-        Fork1 --> Brew([Brew Espresso])
-        Brew --> Join1
-    end
+    %% ── Hot Path (Parallel) ──
+    Check -->|Hot| Fork[/ Fork /]
+    Fork --> Steam([Barista: Steam Milk])
+    Fork --> Brew([Machine: Brew Espresso])
+    Steam --> Join[\ Join \]
+    Brew --> Join
+
+    %% ── Cold Path ──
+    Check -->|Cold| Blend([Barista: Blend Ice])
+
+    %% ── Merge both paths ──
+    Join --> Merge{Merge}
+    Blend --> Merge
+
+    Merge --> Serve([Barista: Serve Drink])
+    Serve --> Receive([Customer: Receive Drink])
+    Receive --> End(((End)))
 ```
+
+> **💡 Reading the Diagram:** Notice how the **Fork** splits into two parallel tasks (Steam Milk + Brew Espresso), and the **Join** waits for both to finish before merging with the Cold path. The **Merge** node then brings the Hot and Cold branches together into a single flow toward Serve.
+
+> **🎯 Swimlane Tip:** In an exam, you'd draw vertical columns (swimlanes) for Customer, Barista, and Machine, then place each action in the correct column. The actors are labeled as prefixes here (`Customer:`, `Barista:`, `Machine:`) to show which lane each action belongs to. On paper, draw the lanes as vertical columns with dashed borders.

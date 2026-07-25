@@ -68,75 +68,42 @@ Let's break down the problem text and see what structural elements we can extrac
 
 ```mermaid
 graph TD
-    ((start)) --> HasWalletDec
+    Start((start)) --> HasWalletDec{Already has wallet?}
 
-    subgraph Creator
-        HasWalletDec{Already has wallet?}
-        OpenWallet[Open crypto wallet]
-        LogIntoWallet[Log into wallet]
-        ConnectWallet[Connect wallet to marketplace]
-        ReqAddNFT[Request to add NFT collection]
-        ReceiveSuccess[Receive success notification]
-        ReceiveDenial[Receive denial notification]
-    end
-
-    subgraph Marketplace
-        CheckConnected{Already connected?}
-        AddDB[Add wallet to database]
-        SendConfirm[Send confirmation message]
-        CheckCollection[Check collection & generate cost]
-        FundsDec{Sufficient funds?}
-        StartMinting[Start minting process]
-        ForkNode===ForkOut1
-        ForkNode===ForkOut2
-        JoinNode===JoinOut
-        SendSuccess[Send success notification]
-        DenyReq[Deny request]
-    end
-
-    subgraph Blockchain Network
-        MineBlock[Mine the block]
-        ValidateBlock[Validate the block]
-    end
-
-    subgraph Remote Storage Network
-        StoreCollection[Store collection on server]
-    end
-
-    HasWalletDec -->|No| OpenWallet
-    OpenWallet --> LogIntoWallet
+    HasWalletDec -->|No| OpenWallet([Creator: Open crypto wallet])
+    OpenWallet --> LogIntoWallet([Creator: Log into wallet])
     HasWalletDec -->|Yes| LogIntoWallet
     
-    LogIntoWallet --> ConnectWallet
-    ConnectWallet --> CheckConnected
+    LogIntoWallet --> ConnectWallet([Creator: Connect wallet to marketplace])
+    ConnectWallet --> CheckConnected{Already connected?}
     
-    CheckConnected -->|No| AddDB
-    AddDB --> SendConfirm
+    CheckConnected -->|No| AddDB([Marketplace: Add wallet to database])
+    AddDB --> SendConfirm([Marketplace: Send confirmation message])
     CheckConnected -->|Yes| SendConfirm
     
-    SendConfirm --> ReqAddNFT
-    ReqAddNFT --> CheckCollection
+    SendConfirm --> ReqAddNFT([Creator: Request to add NFT collection])
+    ReqAddNFT --> CheckCollection([Marketplace: Check collection & generate cost])
     
-    CheckCollection --> FundsDec
-    FundsDec -->|No| DenyReq
-    DenyReq --> ReceiveDenial
-    ReceiveDenial --> ((end1))
+    CheckCollection --> FundsDec{Sufficient funds?}
+    FundsDec -->|No| DenyReq([Marketplace: Deny request])
+    DenyReq --> ReceiveDenial([Creator: Receive denial notification])
+    ReceiveDenial --> End1((end))
     
-    FundsDec -->|Yes| StartMinting
-    StartMinting --> ForkNode
+    FundsDec -->|Yes| StartMinting([Marketplace: Start minting process])
+    StartMinting --> ForkNode[/ Fork /]
     
     %% Branch 1: Blockchain
-    ForkNode --> MineBlock
-    MineBlock --> ValidateBlock
-    ValidateBlock --> JoinNode
+    ForkNode --> MineBlock([Blockchain Network: Mine the block])
+    MineBlock --> ValidateBlock([Blockchain Network: Validate the block])
+    ValidateBlock --> JoinNode[\ Join \]
     
     %% Branch 2: Storage
-    ForkNode --> StoreCollection
+    ForkNode --> StoreCollection([Remote Storage Network: Store collection on server])
     StoreCollection --> JoinNode
     
-    JoinNode --> SendSuccess
-    SendSuccess --> ReceiveSuccess
-    ReceiveSuccess --> ((end2))
+    JoinNode --> SendSuccess([Marketplace: Send success notification])
+    SendSuccess --> ReceiveSuccess([Creator: Receive success notification])
+    ReceiveSuccess --> End2((end))
 ```
 
 ## Step 5: Self-Check

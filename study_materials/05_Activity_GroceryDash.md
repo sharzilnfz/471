@@ -51,41 +51,33 @@ This is a big one. Take a close look at how the swimlanes manage the hand-offs a
 
 ```mermaid
 graph TD
-    ((start)) --> U1
+    Start((start)) --> U1
     
-    subgraph User
-        U1[Log in to app]
-        U2[Browse and select groceries]
-        U3[Review alternatives]
-        D_Alt{Accept alternatives?}
-        U4[Remove item]
-        U5[Cancel order]
-        U6[Proceed to checkout & pay]
-        U7[Review delivery time/location]
-        U8[Track live location]
-        U9[Approve receiving items]
-        U10[Receive confirmation message]
-    end
+    U1(["User: Log in to app"])
+    U2(["User: Browse and select groceries"])
+    U3(["User: Review alternatives"])
+    D_Alt{"Accept alternatives?"}
+    U4(["User: Remove item"])
+    U5(["User: Cancel order"])
+    U6(["User: Proceed to checkout & pay"])
+    U7(["User: Review delivery time/location"])
+    U8(["User: Track live location"])
+    U9(["User: Approve receiving items"])
+    U10(["User: Receive confirmation message"])
     
-    subgraph Order Manager
-        OM1[Receive request]
-        OM2[Check availability]
-        D_Stock{Items available?}
-        OM3[Notify user & suggest alternatives]
-    end
+    OM1(["Order Manager: Receive request"])
+    OM2(["Order Manager: Check availability"])
+    D_Stock{"Items available?"}
+    OM3(["Order Manager: Notify user & suggest alternatives"])
     
-    subgraph Delivery Manager
-        DM1[Search for delivery personnel]
-        D_Found{Driver found?}
-        DM2[Update status: Out for Delivery]
-        DM3[Update status: Delivered]
-    end
+    DM1(["Delivery Manager: Search for delivery personnel"])
+    D_Found{"Driver found?"}
+    DM2(["Delivery Manager: Update status to Out for Delivery"])
+    DM3(["Delivery Manager: Update status to Delivered"])
     
-    subgraph Delivery Person
-        DP1[Review delivery time/location]
-        DP2[Arrive at location]
-        DP3[Approve delivering items]
-    end
+    DP1(["Delivery Person: Review delivery time/location"])
+    DP2(["Delivery Person: Arrive at location"])
+    DP3(["Delivery Person: Approve delivering items"])
     
     %% Shopping Flow
     U1 --> U2
@@ -103,7 +95,7 @@ graph TD
     D_Alt -->|No - Remove| U4
     U4 --> U6
     D_Alt -->|No - Cancel| U5
-    U5 --> ((end))
+    U5 --> End1((end))
     
     %% Checkout and Search
     U6 --> DM1
@@ -113,15 +105,15 @@ graph TD
     D_Found -->|No| DM1 
     
     %% Driver Found - The Negotiation (Fork)
-    D_Found -->|Yes| F1(( ))
+    D_Found -->|Yes| F1[/ Fork /]
     F1 --> U7
     F1 --> DP1
     
     %% Both must approve (Join)
-    U7 --> J1(( ))
+    U7 --> J1[\ Join \]
     DP1 --> J1
     
-    J1 --> D_Approve1{Both approve?}
+    J1 --> D_Approve1{"Both approve?"}
     D_Approve1 -->|No| DM1 %% The LOOP back to searching
     D_Approve1 -->|Yes| DM2
     
@@ -133,13 +125,13 @@ graph TD
     U8 --> U9
     DP2 --> DP3
     
-    U9 --> J2(( ))
+    U9 --> J2[\ Join \]
     DP3 --> J2
     
-    J2 --> D_Approve2{Both approve handover?}
+    J2 --> D_Approve2{"Both approve handover?"}
     D_Approve2 -->|Yes| DM3
     DM3 --> U10
-    U10 --> ((end))
+    U10 --> End2((end))
 ```
 
 ## Step 5: Self-Check

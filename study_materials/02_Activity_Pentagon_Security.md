@@ -63,70 +63,39 @@ Let's break down the problem text and see what structural elements we can extrac
 
 ```mermaid
 graph TD
-    ((start)) --> EnterPass
+    Start((start)) --> EnterPass([User: Enter password])
 
-    subgraph User
-        EnterPass[Enter password]
-        EnterYubi[Enter YubiKey]
-    end
-
-    subgraph Password Kiosk
-        SendHash[Send hash of password]
-        PromptYubi[Prompt user for YubiKey]
-        GenFinalHash[Generate hash with YubiKey and string]
-        LimitCheck{Hash under limit?}
-        AllowAccess[Allow access]
-        DeclineAccess[Decline access]
-    end
-
-    subgraph Basic Credentials Module
-        RecvHash[Receive hash]
-        ForkNode===ForkOut1
-        ForkNode===ForkOut2
-        
-        MatchHash[Match hash against passwords]
-        MatchDec{Match found?}
-        GetUUID[Get user UUID]
-        GenFalseUUID[Generate false UUID]
-        
-        GenRandom[Generate random numbers]
-        
-        JoinNode===ConcatString
-        ConcatString[Concatenate UUID and random numbers]
-        SendString[Send string to Kiosk]
-    end
-
-    EnterPass --> SendHash
-    SendHash --> PromptYubi
-    SendHash --> RecvHash
-    PromptYubi --> EnterYubi
+    EnterPass --> SendHash([Password Kiosk: Send hash of password])
+    SendHash --> PromptYubi([Password Kiosk: Prompt user for YubiKey])
+    SendHash --> RecvHash([Basic Credentials Module: Receive hash])
+    PromptYubi --> EnterYubi([User: Enter YubiKey])
     
-    RecvHash --> ForkNode
+    RecvHash --> ForkNode[/ Fork /]
     
     %% Branch 1
-    ForkNode --> MatchHash
-    MatchHash --> MatchDec
-    MatchDec -->|Yes| GetUUID
-    MatchDec -->|No| GenFalseUUID
-    GetUUID --> JoinNode
+    ForkNode --> MatchHash([Basic Credentials Module: Match hash against passwords])
+    MatchHash --> MatchDec{Match found?}
+    MatchDec -->|Yes| GetUUID([Basic Credentials Module: Get user UUID])
+    MatchDec -->|No| GenFalseUUID([Basic Credentials Module: Generate false UUID])
+    GetUUID --> JoinNode[\ Join \]
     GenFalseUUID --> JoinNode
     
     %% Branch 2
-    ForkNode --> GenRandom
+    ForkNode --> GenRandom([Basic Credentials Module: Generate random numbers])
     GenRandom --> JoinNode
     
-    JoinNode --> ConcatString
-    ConcatString --> SendString
+    JoinNode --> ConcatString([Basic Credentials Module: Concatenate UUID and random numbers])
+    ConcatString --> SendString([Basic Credentials Module: Send string to Kiosk])
     
-    EnterYubi --> GenFinalHash
+    EnterYubi --> GenFinalHash([Password Kiosk: Generate hash with YubiKey and string])
     SendString --> GenFinalHash
     
-    GenFinalHash --> LimitCheck
-    LimitCheck -->|Yes| AllowAccess
-    LimitCheck -->|No| DeclineAccess
+    GenFinalHash --> LimitCheck{Hash under limit?}
+    LimitCheck -->|Yes| AllowAccess([Password Kiosk: Allow access])
+    LimitCheck -->|No| DeclineAccess([Password Kiosk: Decline access])
     
-    AllowAccess --> ((end1))
-    DeclineAccess --> ((end2))
+    AllowAccess --> End1((end))
+    DeclineAccess --> End2((end))
 ```
 
 ## Step 5: Self-Check
