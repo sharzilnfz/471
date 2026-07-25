@@ -1,0 +1,123 @@
+﻿1. Student Assistance Fund (SAF) authorization has a number of steps in its approval process. A SAF authorization form is used in most universities to approve funding for students to aid their studies. Suppose a student fills out a blank form and sends it to his or her departmental chairperson for a signature. If the amount of funds requested by the student is small (under Tk.  10,000), then the chairperson signs the form and routes it to accounts payable to be input into the accounting system. The system cuts a check that is sent to the student for the right amount, and after the check is cashed, the form is filed away with the canceled check. If the check in not cashed within 30 days, the form expires. When the amount of the requested fund is large (over Tk. 10,000), the chairperson signs the form and sends it to the chief financial officer along with a paragraph explaining the reason for the grant, and the chief financial officer will sign the form and pass it along to accounts payable. Both the chairperson and the chief financial officer can reject the SAF authorization form if they do not feel that the reasons for seeking funding are reasonable. In this case, the student can change the form to include more explanation or decide to pay the entire fee.  
+Design an activity diagram based on the above information.
+
+
+                                                                 Will Solve in Class 🙂
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. The Pentagon is working on a new security protocol to ensure that no one other than no Russian spy can infiltrate and get access to classified materials. The protocol set is as follows: 
+   1. The user must first enter their password on the password kiosk.
+   2. The password kiosk will send the hash of the password to the basic credentials module (which is a part of the credentials system) and prompt the user to enter their YubiKey.
+   3. The basic credentials module takes the hash and performs the following simultaneously:
+      1. It matches the hash against known passwords, and if there is a match, then it gets the user uuid, otherwise it generates a false uuid
+      2. generates a set of random numbers 
+   4. After the uuid and the random numbers are generated, the basic credentials module concatenates them to create a string and sent back to the password kiosk.
+   5. The password kiosk will then use the YubiKey and the string to generate a hash
+   6. If the hash is under a specific limit, the user is allowed access, otherwise the user is declined access.
+
+
+Design the activity diagram.
+  
+
+
+
+
+
+
+
+
+
+
+
+________________
+
+
+3. Non-Fungible Tokens (NFT) are an application of blockchains where the proof of ownership of an asset is placed on the blockchain network and the owner of the asset has the hash of the block stored in a digital wallet. First the creator of a NFT collection opens up a crypto wallet and then logs into it, if the creator already has a wallet, then s/he just logs in. After that, the creator connects his/her wallet to a marketplace, during the connection process, the marketplace will check if the wallet is already connected or not, if the wallet was not connected, then the wallet will be added to the database and a confirmation message will be sent, otherwise just the confirmation message will be sent. After connecting the wallet, the creator will request to add the NFT collection to the marketplace. The marketplace will check the collection and generate a minting cost in cryptocurrency and then will check if the wallet contains sufficient cryptocurrency to mint (add) the collection. If sufficient cryptocurrency is not present, the request will be denied. If sufficient cryptocurrency is present, then the marketplace will start the minting process. In the minting process, requests are sent to the blockchain network and the remote storage network. The blockchain network mines the block and then validates the block, the remote storage network stores the collection on a server. After both these processes are complete, the creator is sent a notification of the success.  
+  
+Construct an activity diagram from the above scenario.
+
+
+  
+
+4. Company TeaLeaves has recently adopted a new order management system for handling production requests. The sales representative can place a new order for production. If special materials are required for producing the new order, then an order is placed for special materials with the supplier. Otherwise, if no special materials are required for producing the new order or the supplier has finished providing the special materials, the order is added to the production list. Afterward, the order is scheduled for production. Once the order is confirmed, a letter is generated to the sales representative and to the manager.  
+      Draw the activity diagram for the above scenario. 
+
+
+Tentative Solution below
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. In the digital age, GroceryDash, an online grocery delivery app, simplifies the process of getting essential items at your doorstep. Here's a scenario outlining the key steps in the GroceryDash ordering system:
+
+
+Users initiate the process by logging into the GroceryDash app, where they can browse and select their desired groceries. After selecting items, the order manager receives the request and checks for the availability of the chosen products.
+If the items are available, the order manager proceeds with the checkout process. However, if certain items are out of stock, the system notifies the user and provides alternative suggestions.If the alternative suggestions are not according to the preference of the user, the user can remove the out-of-stock item or cancel the order itself.
+Upon successful checkout and payment, the delivery manager is activated. The system checks the proximity of available delivery personnel within a specified radius.
+If a delivery person is found, both the user and the delivery man are notified of the estimated delivery time and location. If both the delivery man and the user approve of the delivery time and location, only then the system updates the user's order status to 'Out for Delivery.' If any one doesn’t approve of the delivery time, the system goes back to searching for a new delivery man.
+After the 'Out for Delivery' status comes up for the user, the user can track the live location of the delivery personnel. Once the groceries have arrived in the specified location, both the user and delivery man have to approve of receiving the items and delivering the items for the order status to change into 'Delivered,' which then sends the user a confirmation message.
+
+
+  
+
+6. Design an Activity diagram from the following scenario.        
+                                
+Sarah also works as a part-time editor. She logs into an app with her email and password where she is already registered and she reviews any book proposal she gets. She can choose to accept a proposal after analyzing the proposal or reject the proposal. If the project is rejected it will notify the agent and end the scenario. The agent also uses the same app and is registered as an agent with a different interface where he/she can send book proposals to enlisted editors and contracts to enlisted writers. Due to Sarah accepting the proposal, the agent can offer a contract to the writer. The writer analyzes the offer and asks the agent’s opinion on the offer. If both are positive to work on it, the writer will notify Sarah, who is the editor, about accepting it and then begin his/her writing.

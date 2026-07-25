@@ -1,0 +1,86 @@
+﻿1. ABEC University’s permanent campus has multiple restaurants inside the campus premises. So the university has developed a system that helps students order food from those restaurants. To use the system, a student must first visit the site and search for a food item, which is then passed to the SearchEngine. The SearchEngine then fetches the RestaurantPages from RestaurantDatabase which sells that particular food item, serializes them, and returns them to the student. The student then selects the RestaurantPage. From the RestaurantPage, the student adds the item to their cart which sends a request to the StudentCart. After receiving the request, StudentCart adds the item. The student may again search for more than one food item, which will be passed to the SearchEngine. In this case, the previous steps will be repeated. However, multiple food items can be added to the StudentCart if all of them belong to the same restaurant. Finally, when the student decides to order all the food items, he/she select to check out which sends a request to the CartCheckout where the student has to enter his/her student, gsuite email address, phone number, and select the payment method. When all the information has been given, the system confirms the order and shows the estimated delivery time. 
+Now, draw the sequence diagram for the above scenario.
+
+
+  
+
+
+
+2. Design a smart-home automation system that integrates a CPU, sensors, displays, sound systems, and mobile devices to provide automation and security.
+After waking, the user can ask the CPU for scheduled tasks, where tasks exceeding five are sent to the user's mobile, while tasks five or fewer are displayed on the screen. At 10:00 AM, before leaving the house, the CPU asks the user to set a fingerprint via the sensor, followed by setting a PIN to the CPU. Upon returning, the user provides a fingerprint and PIN.
+If the fingerprint is matched, the sensor sends the fingerprint-matched message to the CPU, and the CPU checks the PIN.  In case of the correct pin, a welcome message is shown in the display; otherwise, the user receives a resetting instruction and resets the pin. However, if an unrecognized fingerprint is detected, the CPU receives a fingerprint-mismatched signal and sends an intruder alert to the user’s mobile.
+
+
+
+
+ A screenshot of a computer screen
+
+AI-generated content may be incorrect. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. The following scenario shows a successful authentication of a client using the mobile OTP solution.
+The authentication is initiated when a user requests access to a service that requires authentication. The SP notifies the authenticator that a user needs to be authenticated. The session is redirected to the authenticator and the user is asked to enter a username. The username is sent to the AS, which gets the secret key for this client and, from this generates an OTP. The OTP is also based on a challenge. A different challenge is used every time so the generated OTP is always changing. At last a message authentication code (MAC) based on the secret key is calculated over the OTP. The AS sends the triplet (challenge, MAC, OTP) to the Authenticator which relays the challenge and the MAC to the client. Upon receiving the challenge, the client calculates the OTP. Then it calculates the MAC and compares it to the one received from the Authenticator. If the values match the client can authenticate the AS since the AS has proved that it is in possession of the shared key. The client then sends the OTP back to the Authenticator. If the MAC is wrong, the authentication is aborted. The Authenticator compares the OTP with the one received from the AS and if they match, notifies the SP that the client is authenticated. A mutual authentication of the client and server has been achieved and the session is redirected back to the SP which grants the user access to the service. 
+Draw a sequence diagram based on the above information.
+
+
+ A diagram of a software system
+
+AI-generated content may be incorrect. 
+
+
+
+
+
+
+
+
+
+
+
+4. A student logs into an online examination system to take a timed multiple-choice test. First, the student enters their username and password. The system checks if the credentials are valid; if not, it asks the student to try again (this can repeat up to 3 times). If successful, the system shows the list of available tests. The student selects a test and starts it. The system then starts a timer (which updates itself every second) and loads the first question. If all the questions are not seen, for each question, the student can either answer it, skip it, or mark it for review. If the student answers, the system saves the response immediately. If they skip, the system moves to the next question. If they mark for review, the system adds the question to a separate review list and also goes to the next question. If the student clicks "End Test" before time is up, the system shows a confirmation box with two choices: confirm or cancel. If confirmation is selected, the test ends early. If cancellation is selected, the student returns to the test. When the timer runs out or the student confirms the end, the system saves all answers, submits the test. A result generator object is then created by the system, which calculates the score using its grading method (one question at a time until all are done), then sends the result back to the system. The system then destroys the result generator. Finally, the system shows the result to the student.
+
+
+  
+
+
+
+
+
+
+
+5. Ecommerce has been booming in Bangladesh, and especially with the pandemic, the demand for it has exponentially increased. A general case ecommerce runs as follows: 
+1. After a customer visits the site, they search for a product by typing its name, which is passed to the SearchEngine 
+2. The SearchEngine then fetches the products from the ProductsDatabase and serials them in accordance with the relevance of the searched keywords and returns them to the customer 
+3. The customer selects an item which takes the user to the ProductPage 
+4. From the ProductPage, the customer adds the item to their cart which sends a request to the CustomerCart 
+5. After receiving the request, CustomerCart sends a request to the ProductsDatabase to check if the item is in stock, if the item is in stock, the product gets added to the CustomerCart otherwise  an error is shown 
+6. Finally, the customer selects to check out, which sends a request to the CartCheckout where the customer has to enter their full name, email address, phone number and delivery address 
+7. If all the information has been entered correctly, a success message is shown, otherwise an error message is shown 
+Draw the sequence diagram for the above scenario 
+
+
+Answer:
+  
+
+
+
+6. Watching a movie or documentary in hoichoi is always exciting. In a simple hoichoi site, after the  user logs in using the credentials, there is a simple dashboard containing the suggested movie or  Tv series along with a search bar at the top to search for any item. The user can search for the  contents in three ways. They can search by a content name like “Mahanagar”, they can search by  the name of an Artist or Director like “Mostafa Sarwar Faruki,” and finally they can search by a  genre like “Crime Thriller.” For the first case, the hoichoi search manager fetches a single entry  along with the metadata from the hoichoi server and displays it to the user as a tile along with the  metadata. For the second case, a list of content involving the Artist or Director is showed (not as  tiles) to the users after being fetched from the server. And finally, the relevant contents of a genre  search are offered as tiles (without the metadata) for the user to select, however the search manager  fetches the metadata from server for later use. All user communication with the search manager is  relayed by the web interface of hoichoi. Draw a sequence diagram based on search system of  hoichoi as described above.
