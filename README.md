@@ -1,21 +1,32 @@
-# CSE-471 — UML Diagram Study Guide
+# CSE-471 — System Analysis & Design Study Guide
 
-> Learn the *thinking process*, not just the answers. Solve any diagram problem yourself.
+> Learn the *thinking process*, not just the answers. Build intuition for both theory and diagrams.
 
 ---
 
 ## How to Use
 
-1. Start with the **Masterclass** for the diagram type you're studying
-2. Learn the **5-Step Method** — your universal solving framework
-3. Attempt each problem **before** reading the walkthrough
-4. Use the **Self-Check** questions to verify your diagram
+1. **Lecture Theory** — Open the interactive HTML masterclasses (download and open in browser)
+2. **Diagram Practice** — Start with the Mermaid masterclass, then attempt each problem yourself
+3. Use the **5-Step Method** as your universal solving framework
+4. Use **Self-Check** questions to verify understanding
 
-All diagrams use [Mermaid](https://mermaid.js.org/) syntax — renders natively in VS Code, GitHub, Obsidian, or [mermaid.live](https://mermaid.live).
+Diagrams use [Mermaid](https://mermaid.js.org/) syntax — renders in VS Code, GitHub, Obsidian, or [mermaid.live](https://mermaid.live).
 
 ---
 
-## Foundations
+## Interactive Lecture Masterclasses (HTML)
+
+> Download and open in any browser. Dark theme, clickable pipelines, hover grids, self-tests.
+
+| Lectures | File | Covers |
+|:---------|:-----|:-------|
+| Lecture 1-2 | [Intro & SDLC + Feasibility Analysis](./study_materials/CSE471_Lectures_1_2_Masterclass.html) | SDLC phases, DevOps, methodologies, NPV/ROI/BEP calculator, team roles |
+| Lecture 3 | [Requirements Determination](./study_materials/CSE471_Lecture_3_Masterclass.html) | Functional vs NFR, 5 gathering techniques, 7 analysis strategies |
+
+---
+
+## Diagram Foundations
 
 | File | Type | Covers |
 |:-----|:-----|:-------|
