@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Analysis & Design + Feasibility — Masterclass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+
+/* ============ PASTE THE FULL CONTENTS OF base-styles.css HERE ============ */
+/* =====================================================================
+   MC — Interactive Masterclass base styles
+   Paste this whole file into the lesson's <style> tag. It defines the
+   full design system (colors, type, layout, components). Lesson-
+   specific CSS, if any, goes AFTER this block so it can override.
+   ===================================================================== */
+:root{
+  --bg:#0a0d13; --panel:#131826; --panel-2:#171d2d; --line:#262e42;
+  --text:#e7eaf2; --text-dim:#9099b0; --text-faint:#626b84;
+
+  /* Semantic axis / role colors — reuse these everywhere. Keep the
+     mapping CONSISTENT within one lesson (batch is always blue, etc.)
+     so color becomes a second language the reader learns to read. */
+  --c-batch:#5eb4ff;  --c-batch-soft:rgba(94,180,255,.14);
+  --c-row:#57d38c;    --c-row-soft:rgba(87,211,140,.14);
+  --c-col:#ffcf56;    --c-col-soft:rgba(255,207,86,.14);
+  --c-channel:#ff7b7b;--c-channel-soft:rgba(255,123,123,.14);
+  --c-accent:#c792ea;
+
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(94,180,255,.07), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 20%, rgba(199,146,234,.06), transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+/* subtle dot-grid atmosphere, fades out by mid-page */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:26px 26px;
+  mask-image:linear-gradient(to bottom,black,black,transparent 100%);
+}
+
+h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;margin:0 0 .5em;}
+p{margin:0 0 1em;}
+code,.mono{font-family:var(--font-mono);}
+.katex{color:var(--text) !important;} /* KaTeX defaults to black text; override for dark theme */
+
+/* ---------- layout shell ---------- */
+.layout{position:relative;z-index:1;display:flex;max-width:1300px;margin:0 auto;}
+nav.toc{position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;width:222px;flex:0 0 222px;padding:28px 14px 40px 24px;border-right:1px solid var(--line);scrollbar-width:thin;}
+nav.toc .brand{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;}
+nav.toc a{display:block;color:var(--text-dim);text-decoration:none;font-size:13.5px;padding:6px 10px;border-radius:7px;border-left:2px solid transparent;margin-bottom:1px;}
+nav.toc a:hover{color:var(--text);background:var(--panel);}
+nav.toc a.lvl2{padding-left:22px;font-size:12.5px;color:var(--text-faint);}
+main{flex:1;min-width:0;padding:0 0 110px;}
+.wrap{max-width:860px;margin:0 auto;padding:0 40px;}
+
+/* ---------- hero ---------- */
+.hero{padding:60px 40px 18px;max-width:860px;margin:0 auto;}
+.hero .eyebrow{font-family:var(--font-mono);font-size:12.5px;color:var(--c-accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:42px;line-height:1.1;margin-bottom:16px;}
+.hero .sub{font-size:16.5px;color:var(--text-dim);max-width:620px;}
+
+/* ---------- sections ---------- */
+section{padding-top:60px;scroll-margin-top:20px;}
+section.part-head{padding-top:92px;border-top:1px solid var(--line);margin-top:18px;}
+.part-label{font-family:var(--font-mono);font-size:12.5px;color:var(--text-faint);letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px;}
+h2{font-size:28px;}
+h3{font-size:19.5px;margin-top:2.1em;}
+
+blockquote.insight{margin:1.5em 0;padding:15px 19px;background:var(--panel);border-left:3px solid var(--c-accent);border-radius:0 10px 10px 0;font-size:14.5px;}
+blockquote.insight b{color:var(--c-accent);}
+
+.trap{margin:1.3em 0;padding:13px 17px;background:rgba(255,123,123,.07);border:1px solid rgba(255,123,123,.25);border-radius:10px;font-size:14.5px;}
+.trap .lbl{font-family:var(--font-mono);color:var(--c-channel);font-weight:600;margin-right:6px;}
+
+/* colored shape tuples: <span class="shape"><span class="ax-n">8</span>, <span class="ax-c">3</span>...</span> */
+.shape{font-family:var(--font-mono);font-weight:600;white-space:nowrap;}
+.ax-n{color:var(--c-batch);}
+.ax-c{color:var(--c-channel);}
+.ax-h,.ax-seq{color:var(--c-row);}
+.ax-w,.ax-e{color:var(--c-col);}
+.ax-g{color:var(--text-dim);}
+
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 22px;font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);}
+.legend .sw{display:inline-flex;align-items:center;gap:6px;}
+.legend .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+
+/* ---------- code / math blocks ---------- */
+pre{background:#0c1018;border:1px solid var(--line);border-radius:11px;padding:16px 18px;overflow-x:auto;font-size:13px;margin:1.3em 0;line-height:1.6;}
+code{font-size:13px;}
+pre code{color:#d3d8e6;}
+.tok-kw{color:#ff9d7a;} .tok-fn{color:#7ec9ff;} .tok-str{color:#a9dc76;} .tok-num{color:#ffcf56;} .tok-cm{color:#626b84;font-style:italic;} .tok-cls{color:#c792ea;}
+
+/* ---------- 3D viz panels ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin:1.6em 0;}
+.panel-title{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.panel-title .hint{font-family:var(--font-body);text-transform:none;letter-spacing:0;font-size:12px;color:var(--text-faint);}
+.viz3d{width:100%;height:260px;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%, #171d2d, #0c0f17);cursor:grab;touch-action:none;}
+.viz-caption{margin-top:12px;font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);min-height:18px;}
+.viz-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+button.chip{font-family:var(--font-mono);font-size:12.5px;background:var(--panel-2);color:var(--text-dim);border:1px solid var(--line);padding:7px 13px;border-radius:20px;cursor:pointer;transition:all .15s;}
+button.chip:hover{color:var(--text);border-color:var(--c-batch);background:rgba(94,180,255,.08);}
+button.chip.active{color:#0a0d13;background:var(--c-batch);border-color:var(--c-batch);font-weight:600;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.three-col{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;}
+@media (max-width:720px){.two-col,.three-col{grid-template-columns:1fr;}}
+
+/* ---------- DOM grid / strip widgets (indexing, matmul, sliding window) ---------- */
+.data-grid{display:grid;gap:4px;grid-template-columns:repeat(var(--cols,4),minmax(30px,1fr));}
+.dg-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--panel-2);border:1px solid var(--line);border-radius:6px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);transition:all .12s;user-select:none;}
+.dg-cell.hl{background:var(--c-batch-soft);border-color:var(--c-batch);color:var(--text);}
+.dg-cell.active{background:var(--c-accent);color:#0a0d13;border-color:var(--c-accent);font-weight:700;}
+.grid-label{font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+
+.flat-strip{display:flex;gap:4px;flex-wrap:wrap;margin:10px 0;}
+.fs-cell{min-width:26px;height:26px;padding:0 4px;display:flex;align-items:center;justify-content:center;background:var(--panel-2);border:1px solid var(--line);border-radius:5px;font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);}
+.fs-cell.active{background:var(--c-accent);color:#0a0d13;border-color:var(--c-accent);font-weight:700;}
+.fs-cell.hl{background:var(--c-batch-soft);border-color:var(--c-batch);color:var(--text);}
+
+.formula-out{font-family:var(--font-mono);font-size:13px;color:var(--c-accent);min-height:20px;margin-top:10px;}
+
+/* ---------- weighted-sum bar rows (single-neuron style widgets) ---------- */
+.neuron-bars{display:flex;flex-direction:column;gap:8px;}
+.term-row{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:13px;color:var(--text-dim);}
+.term-row .t-name{width:110px;color:var(--text-faint);flex:0 0 auto;}
+.term-row .t-eq{flex:0 0 auto;color:var(--text-faint);}
+.term-row .t-bar-wrap{flex:1;background:var(--panel-2);border-radius:5px;height:16px;position:relative;overflow:hidden;}
+.term-row .t-bar{position:absolute;top:0;bottom:0;left:50%;border-radius:4px;}
+.term-row .t-num{width:56px;text-align:right;color:var(--text);flex:0 0 auto;}
+.term-row.total{border-top:1px solid var(--line);padding-top:8px;margin-top:4px;color:var(--text);font-weight:600;}
+
+/* ---------- pipeline / stage stepper ---------- */
+.pipeline{display:flex;overflow-x:auto;gap:2px;padding:6px 2px 14px;scrollbar-width:thin;}
+.stage{flex:0 0 auto;min-width:108px;padding:12px 10px;text-align:center;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;cursor:pointer;transition:all .15s;}
+.stage:hover{border-color:var(--c-batch);}
+.stage.active{border-color:var(--c-accent);background:rgba(199,146,234,.09);}
+.stage .name{font-size:12.5px;font-weight:600;}
+.stage .shp{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-top:4px;}
+.stage-arrow{flex:0 0 auto;align-self:center;color:var(--text-faint);padding:0 2px;}
+
+/* ---------- self-test Q&A ---------- */
+.qa{margin:1.4em 0;padding:16px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;}
+.qa .q{font-weight:600;margin-bottom:6px;font-size:14.5px;}
+.qa details summary{cursor:pointer;color:var(--c-batch);font-size:13.5px;font-family:var(--font-mono);}
+.qa details p{margin:10px 0 0;font-size:14px;color:var(--text-dim);}
+
+/* ---------- quick reference card ---------- */
+.refcard{background:#0b0e15;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.refcard pre{margin:0;border:none;border-radius:0;}
+
+hr.div{border:none;border-top:1px solid var(--line);margin:3em 0;}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:2px 8px;border-radius:20px;background:var(--panel-2);border:1px solid var(--line);color:var(--text-dim);margin-right:6px;}
+footer{text-align:center;padding:60px 20px 30px;color:var(--text-faint);font-size:13px;font-family:var(--font-mono);}
+
+@media (max-width:920px){
+  nav.toc{display:none;}
+  .hero{padding:44px 22px 10px;}
+  .wrap{padding:0 22px;}
+  .hero h1{font-size:32px;}
+}
+
+/* ============ then any lesson-specific CSS overrides/additions below ============ */
+
+/* Custom styles */
+.horror-card { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 15px; cursor: pointer; transition: all 0.2s; }
+.horror-card:hover { border-color: var(--c-channel); background: var(--c-channel-soft); }
+.horror-desc { display: none; margin-top: 10px; font-size: 13.5px; color: var(--text-dim); }
+.cost-bar { height: 20px; background: var(--c-channel); border-radius: 4px; display: inline-block; vertical-align: middle; }
+.role-card { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 15px; cursor: pointer; transition: all 0.2s; }
+.role-card:hover { border-color: var(--c-batch); }
+.role-desc { display: none; margin-top: 10px; font-size: 13.5px; color: var(--text-dim); }
+.devops-loop { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0; }
+.devops-step { background: var(--panel-2); padding: 8px 12px; border-radius: 20px; font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); }
+.cb-table-container { overflow-x: auto; margin-top: 15px; }
+.cb-table-container .data-grid { --cols: 6; }
+.cb-table-container .dg-cell { aspect-ratio: auto; padding: 10px; text-align: right; justify-content: flex-end; }
+.cb-table-container .dg-cell.row-header { justify-content: flex-start; text-align: left; font-weight: 600; color: var(--text); background: var(--panel); }
+.cb-table-container .dg-cell.col-header { justify-content: center; text-align: center; font-weight: 600; color: var(--text); background: var(--panel); }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">◆ CSE-471</div>
+  <a href="#big-picture">0 · Big Picture</a>
+  <a href="#part-1">1 · What is SA&D?</a>
+  <a href="#part-2">2 · The SDLC</a>
+  <a href="#part-3">3 · Methodologies</a>
+  <a href="#part-4">4 · DevOps</a>
+  <a href="#part-5">5 · Feasibility</a>
+  <a href="#part-6">6 · Money Math</a>
+  <a href="#part-7">7 · Team Roles</a>
+  <a href="#reference">📌 Reference</a>
+</nav>
+<main>
+  <div class="hero">
+    <div class="eyebrow">Lectures 1 & 2</div>
+    <h1>System Analysis, Design & Feasibility</h1>
+    <p class="sub">From understanding the software lifecycle to proving your project is worth building. A complete masterclass.</p>
+  </div>
+
+  <div class="wrap">
+
+  <section id="big-picture" class="part-head">
+    <div class="part-label">Part 0</div>
+    <h2>🧠 The Big Picture</h2>
+    <p>Building software is like building a house — you need a plan (Planning), blueprints (Analysis), architecture (Design), and construction (Implementation). Skip any step, your house collapses — and software houses collapse 10x more often.</p>
+
+    <div class="two-col" style="margin: 20px 0;">
+      <div class="panel" style="margin:0;">
+        <div style="font-size: 32px; color: var(--c-batch); font-weight: 600; margin-bottom: 5px;">2%</div>
+        <div style="color: var(--text-dim); font-size: 14px;">Large ($100M+) software projects that succeed.</div>
+      </div>
+      <div class="panel" style="margin:0;">
+        <div style="font-size: 32px; color: var(--c-channel); font-weight: 600; margin-bottom: 5px;">30% &amp; 50%</div>
+        <div style="color: var(--text-dim); font-size: 14px;">Projects cancelled, and projects that go 200%+ over budget.</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Click to reveal<span class="hint">Software Horror Stories</span></div>
+      <div class="three-col">
+        <div class="horror-card" onclick="this.querySelector('.horror-desc').style.display = 'block'">
+          <div style="font-weight: 600;">Bank of America</div>
+          <div class="horror-desc">$1B loss due to failed masterNet trust accounting system.</div>
+        </div>
+        <div class="horror-card" onclick="this.querySelector('.horror-desc').style.display = 'block'">
+          <div style="font-weight: 600;">B1 Bomber</div>
+          <div class="horror-desc">$1B fix needed for software integration issues.</div>
+        </div>
+        <div class="horror-card" onclick="this.querySelector('.horror-desc').style.display = 'block'">
+          <div style="font-weight: 600;">Ariane 5 Rocket</div>
+          <div class="horror-desc">$500M explosion caused by a 64-bit to 16-bit conversion error.</div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="insight"><b>The whole lesson in one line:</b> Every system starts with a question: What problem are we solving, and is it worth solving?</blockquote>
+  </section>
+
+  <section id="part-1" class="part-head">
+    <div class="part-label">Part 1</div>
+    <h2>🔑 What is System Analysis & Design?</h2>
+    <p>The Systems Analyst is a <b>change agent</b> creating business value. They don't just write code; they identify improvements, design systems to implement them, and train others.</p>
+    
+    <div class="panel">
+      <div class="panel-title">Toggle Components<span class="hint">The 5 Components of an IS</span></div>
+      <div class="viz-controls" id="is-components">
+        <button class="chip active" onclick="showIsComponent('Hardware', this)">Hardware</button>
+        <button class="chip" onclick="showIsComponent('Software', this)">Software</button>
+        <button class="chip" onclick="showIsComponent('Databases', this)">Databases</button>
+        <button class="chip" onclick="showIsComponent('Networks', this)">Networks</button>
+        <button class="chip" onclick="showIsComponent('Procedures', this)">Procedures</button>
+      </div>
+      <div class="viz-caption" id="is-caption" style="margin-top: 15px; font-size: 14.5px;">Physical devices (servers, phones, computers) that run the system.</div>
+    </div>
+
+    <p>Why SA matters: <b>45%</b> of software errors come from missing or incorrect requirements. Finding a bug late is disastrous.</p>
+    <div class="panel">
+      <div class="panel-title">Cost Multiplier Visualization<span class="hint">Cost to fix a bug based on phase found</span></div>
+      <div style="display:grid; grid-template-columns: 120px 1fr 60px; gap: 10px; align-items: center; margin-top: 15px; font-family: var(--font-mono); font-size: 13px;">
+        <div>Requirements</div><div style="background: var(--panel-2); border-radius: 4px;"><div class="cost-bar" style="width: 1%; background: var(--c-batch);"></div></div><div>1x</div>
+        <div>Design</div><div style="background: var(--panel-2); border-radius: 4px;"><div class="cost-bar" style="width: 3%; background: var(--c-row);"></div></div><div>3x</div>
+        <div>Coding</div><div style="background: var(--panel-2); border-radius: 4px;"><div class="cost-bar" style="width: 10%; background: var(--c-col);"></div></div><div>10x</div>
+        <div>Testing</div><div style="background: var(--panel-2); border-radius: 4px;"><div class="cost-bar" style="width: 50%; background: var(--c-channel);"></div></div><div>50x</div>
+        <div>Post-Delivery</div><div style="background: var(--panel-2); border-radius: 4px;"><div class="cost-bar" style="width: 100%;"></div></div><div>100x</div>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Self-test: If a requirement error costs $100 to fix during the Planning phase, how much might it cost if discovered after deployment?</div>
+      <details><summary>Reveal</summary><p>$10,000 (100x multiplier). This is why thorough upfront analysis is critical.</p></details>
+    </div>
+  </section>
+
+  <section id="part-2" class="part-head">
+    <div class="part-label">Part 2</div>
+    <h2>🔄 The SDLC — 4 Phases</h2>
+    <p>The Systems Development Life Cycle is the process of understanding how an information system can support business needs, designing the system, building it, and delivering it to users.</p>
+
+    <div class="panel">
+      <div class="panel-title">Click a Phase<span class="hint">The SDLC Pipeline</span></div>
+      <div class="pipeline">
+        <div class="stage active" onclick="showSdlcPhase(0, this)">
+          <div class="name">Planning</div><div class="shp">System Request</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" onclick="showSdlcPhase(1, this)">
+          <div class="name">Analysis</div><div class="shp">System Proposal</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" onclick="showSdlcPhase(2, this)">
+          <div class="name">Design</div><div class="shp">System Spec</div>
+        </div>
+        <div class="stage-arrow">→</div>
+        <div class="stage" onclick="showSdlcPhase(3, this)">
+          <div class="name">Implementation</div><div class="shp">Completed System</div>
+        </div>
+      </div>
+      <div id="sdlc-details" style="margin-top: 20px; padding: 15px; background: var(--panel-2); border-radius: 8px;">
+        <div style="font-weight: 600; color: var(--c-batch); font-size: 16px; margin-bottom: 10px;">Planning: Why should we build this system?</div>
+        <ul style="color: var(--text-dim); margin-top: 0; padding-left: 20px; font-size: 14px;">
+          <li>Identify business value</li>
+          <li>Analyze feasibility (Tech, Econ, Org)</li>
+          <li>Develop workplan</li>
+        </ul>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 10px;">Deliverable: System Request &amp; Project Plan → Go/No-Go Decision</div>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Self-test: Put the SDLC phases in the correct order.</div>
+      <details><summary>Reveal</summary><p>Planning → Analysis → Design → Implementation.</p></details>
+    </div>
+  </section>
+
+  <section id="part-3" class="part-head">
+    <div class="part-label">Part 3</div>
+    <h2>🛠 Methodologies Evolution</h2>
+    <p>A methodology is a formalized approach to implementing the SDLC.</p>
+
+    <div class="panel">
+      <div class="viz-controls" style="margin-top: 0; margin-bottom: 15px;">
+        <button class="chip active" onclick="showMethodology('Waterfall', this)">Waterfall</button>
+        <button class="chip" onclick="showMethodology('RAD', this)">RAD</button>
+        <button class="chip" onclick="showMethodology('Agile', this)">Agile</button>
+        <button class="chip" onclick="showMethodology('DevOps', this)">DevOps</button>
+      </div>
+      <div id="method-details" style="font-size: 14.5px;">
+        <div style="font-weight: 600; color: var(--c-batch);">Waterfall</div>
+        <p style="color: var(--text-dim); margin-bottom: 10px;">Sequential phases. You cannot move to the next phase until the current one is complete.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 13.5px;">
+          <div><b style="color: var(--c-row);">Pros:</b> Clear requirements, rigorous documentation.</div>
+          <div><b style="color: var(--c-channel);">Cons:</b> Inflexible, long time before user sees anything.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Self-test: When should you use Agile vs Waterfall?</div>
+      <details><summary>Reveal</summary><p>Use Agile when requirements are unclear or likely to change. Use Waterfall for highly critical, well-understood systems (like aerospace) where upfront rigorous design is required.</p></details>
+    </div>
+  </section>
+
+  <section id="part-4" class="part-head">
+    <div class="part-label">Part 4</div>
+    <h2>🚀 DevOps Deep Dive</h2>
+    <p>DevOps bridges Development and Operations. It’s a culture, set of practices, and tools that increases an organization’s ability to deliver applications at high velocity.</p>
+
+    <div class="panel">
+      <div class="panel-title">The 8 Steps Visual Loop</div>
+      <div class="devops-loop">
+        <div class="devops-step" style="border-color: var(--c-batch); color: var(--c-batch);">Plan</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-batch); color: var(--c-batch);">Code</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-batch); color: var(--c-batch);">Build</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-batch); color: var(--c-batch);">Test</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-col); color: var(--c-col);">Release</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-row); color: var(--c-row);">Deploy</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-row); color: var(--c-row);">Operate</div>
+        <div class="stage-arrow">→</div>
+        <div class="devops-step" style="border-color: var(--c-row); color: var(--c-row);">Monitor</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3>5 Continuous Pillars</h3>
+        <ul style="color: var(--text-dim); font-size: 14px; padding-left: 20px;">
+          <li>Continuous Development</li>
+          <li>Continuous Testing</li>
+          <li>Continuous Integration (CI)</li>
+          <li>Continuous Deployment (CD)</li>
+          <li>Continuous Monitoring</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Containerization</h3>
+        <p style="color: var(--text-dim); font-size: 14px;">Packaging code and dependencies together (e.g., Docker) so the app runs consistently across any environment. Solves the "it works on my machine" problem.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Self-test: What is the main advantage of DevOps over traditional deployment?</div>
+      <details><summary>Reveal</summary><p>Speed and reliability. It reduces deployment time from weeks/months to minutes/hours while improving system stability through automation and continuous monitoring.</p></details>
+    </div>
+  </section>
+
+  <section id="part-5" class="part-head">
+    <div class="part-label">Part 5</div>
+    <h2>⚖️ Feasibility Analysis — The 3 Pillars</h2>
+    <p>Before writing a line of code, we must prove the project is viable. The <b>System Request</b> kicks this off (Project Sponsor, Business Need, Business Requirements, Business Value, Special Issues).</p>
+
+    <div class="three-col">
+      <div class="panel" style="margin: 0; padding: 16px;">
+        <div style="font-weight: 600; color: var(--c-batch);">1. Technical</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-bottom: 10px;">"Can we build it?"</div>
+        <ul style="color: var(--text-dim); font-size: 13.5px; padding-left: 15px; margin: 0;">
+          <li>Familiarity with application</li>
+          <li>Familiarity with tech stack</li>
+          <li>Project size</li>
+          <li>Compatibility with existing systems</li>
+        </ul>
+      </div>
+      <div class="panel" style="margin: 0; padding: 16px;">
+        <div style="font-weight: 600; color: var(--c-row);">2. Economic</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-bottom: 10px;">"Should we build it?"</div>
+        <ul style="color: var(--text-dim); font-size: 13.5px; padding-left: 15px; margin: 0;">
+          <li>Development costs</li>
+          <li>Operating costs</li>
+          <li>Tangible benefits (revenue, savings)</li>
+          <li>Intangible benefits (brand, morale)</li>
+        </ul>
+      </div>
+      <div class="panel" style="margin: 0; padding: 16px;">
+        <div style="font-weight: 600; color: var(--c-col);">3. Organizational</div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-bottom: 10px;">"Will they use it?"</div>
+        <ul style="color: var(--text-dim); font-size: 13.5px; padding-left: 15px; margin: 0;">
+          <li>Strategic alignment</li>
+          <li>Stakeholder analysis (Champion)</li>
+          <li>Management support</li>
+          <li>User acceptance</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="trap"><span class="lbl">⚠️</span>Include/Extend are Use Case concepts, NOT Feasibility types. Feasibility is Tech, Econ, Org.</div>
+    
+    <div class="qa">
+      <div class="q">Self-test: Is "increased brand recognition" a tangible or intangible benefit?</div>
+      <details><summary>Reveal</summary><p>Intangible. It cannot be easily measured in exact dollar amounts, unlike "reduced server costs" or "increased sales."</p></details>
+    </div>
+  </section>
+
+  <section id="part-6" class="part-head">
+    <div class="part-label">Part 6</div>
+    <h2>💰 The Money Math (Economic Feasibility)</h2>
+    <p>Time is money. A dollar today is worth more than a dollar tomorrow. We use Present Value (PV) to normalize future cash flows.</p>
+
+    <div class="panel">
+      <div class="two-col" style="margin-bottom: 15px;">
+        <div>
+          <div style="font-size: 13.5px; color: var(--text-faint); margin-bottom: 5px;">Present Value (PV)</div>
+          <div style="font-size: 16px;">$$PV = \frac{\text{Cash Flow}}{(1+i)^n}$$</div>
+        </div>
+        <div>
+          <div style="font-size: 13.5px; color: var(--text-faint); margin-bottom: 5px;">Net Present Value (NPV)</div>
+          <div style="font-size: 16px;">$$NPV = \sum PV_{\text{Benefits}} - \sum PV_{\text{Costs}}$$</div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div style="font-size: 13.5px; color: var(--text-faint); margin-bottom: 5px;">Return on Investment (ROI)</div>
+          <div style="font-size: 16px;">$$ROI = \frac{\text{Total Benefits} - \text{Total Costs}}{\text{Total Costs}}$$</div>
+        </div>
+        <div>
+          <div style="font-size: 13.5px; color: var(--text-faint); margin-bottom: 5px;">Break-Even Point (BEP)</div>
+          <div style="font-size: 15px;">$$BEP = \text{Year} + \frac{\text{Net Cash Flow} - \text{Cumulative NPV}}{\text{Net Cash Flow}}$$</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Cost-Benefit Analysis Table<span class="hint">Hover rows to see PV calculations (i=6%)</span></div>
+      <div class="cb-table-container">
+        <div class="data-grid" id="cb-table" style="--cols: 5;"></div>
+      </div>
+      <div class="formula-out" id="cb-formula" style="margin-top: 15px;">Hover a row to see math.</div>
+      <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 14px;">
+        <span style="color: var(--c-row);">Final NPV: $68,292</span> &nbsp;|&nbsp; 
+        <span style="color: var(--c-batch);">ROI: 2.1%</span> &nbsp;|&nbsp; 
+        <span style="color: var(--c-col);">BEP: 3.38 years</span>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Self-test: If NPV is negative, should we proceed with the project?</div>
+      <details><summary>Reveal</summary><p>Usually no. A negative NPV means the project costs more than it earns in present-day dollars. (Unless there are massive overriding intangible benefits like regulatory compliance).</p></details>
+    </div>
+  </section>
+
+  <section id="part-7" class="part-head">
+    <div class="part-label">Part 7</div>
+    <h2>👥 Project Team Roles</h2>
+    <p>A project requires diverse skills. Click each role to see what they do.</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+      <div class="role-card" onclick="this.querySelector('.role-desc').style.display = 'block'">
+        <div style="font-weight: 600;">Business Analyst</div>
+        <div class="role-desc">Focuses on business issues. Analyzes business value and designs new processes.</div>
+      </div>
+      <div class="role-card" onclick="this.querySelector('.role-desc').style.display = 'block'">
+        <div style="font-weight: 600;">Systems Analyst</div>
+        <div class="role-desc">Focuses on IS issues. Translates business requirements into system designs.</div>
+      </div>
+      <div class="role-card" onclick="this.querySelector('.role-desc').style.display = 'block'">
+        <div style="font-weight: 600;">Infrastructure Analyst</div>
+        <div class="role-desc">Focuses on technical issues. Hardware, networks, and database design.</div>
+      </div>
+      <div class="role-card" onclick="this.querySelector('.role-desc').style.display = 'block'">
+        <div style="font-weight: 600;">Change Mgt Analyst</div>
+        <div class="role-desc">Focuses on people issues. Training, overcoming resistance to change.</div>
+      </div>
+      <div class="role-card" onclick="this.querySelector('.role-desc').style.display = 'block'">
+        <div style="font-weight: 600;">Project Manager</div>
+        <div class="role-desc">Manages schedule, budget, and resources. Ensures project is on time.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="div">
+
+  <section id="reference">
+    <div class="part-label">📌 Reference</div>
+    <h2>Quick Reference</h2>
+    <div class="refcard"><pre><code>## SDLC Phases #################################
+1. Planning         # System Request, Feasibility, Workplan
+2. Analysis         # Requirements Gathering, System Proposal
+3. Design           # Architecture, UI/UX, DB Design, System Spec
+4. Implementation   # Coding, Testing, Deployment, Maintenance
+
+## Feasibility Checklist #######################
+Tech: Familiarity, Size, Compatibility
+Econ: Costs (Dev, Ops), Benefits (Tangible, Intangible)
+Org:  Strategic Alignment, Stakeholders, Champion
+
+## Financial Formulas ##########################
+PV  = CashFlow / (1+i)^n
+NPV = Sum(PV_Benefits) - Sum(PV_Costs)
+ROI = (Total_Benefits - Total_Costs) / Total_Costs
+BEP = Year + ((Net_Cash_Flow - Cum_NPV) / Net_Cash_Flow)</code></pre></div>
+  </section>
+
+  <footer>Every successful system balances technical excellence with business value.</footer>
+  </div>
+</main>
+</div>
+
+<script>
+
+/* ============ PASTE THE FULL CONTENTS OF toolkit.js HERE, VERBATIM ============ */
+/* =====================================================================
+   MC — Interactive Masterclass Toolkit
+   Paste this whole file into the lesson's <script> tag, ABOVE your
+   lesson-specific widget code. Requires three.js r128 to already be
+   loaded on the page (see template.html head).
+
+   Everything lives under the `MC` namespace so it never collides with
+   lesson-specific variables. Load once per page.
+   ===================================================================== */
+const MC = (function () {
+
+  // ---------------------------------------------------------------
+  // Shared color palette — reuse these everywhere for visual
+  // consistency across every lesson. Do not invent new hexes ad hoc.
+  // ---------------------------------------------------------------
+  const PALETTE = {
+    batch: 0x5eb4ff,   // outermost / batch / "N" axis, or generic primary
+    row: 0x57d38c,     // rows / height / sequence-position axis
+    col: 0xffcf56,     // columns / width / feature axis
+    channel: 0xff7b7b, // channel / depth axis (also doubles as "negative")
+    accent: 0xc792ea,  // highlight / marker / "you are here"
+    neutral: 0x2a3040  // dim / inactive state
+  };
+  // Cycling palette for "N independent things stacked together"
+  // (channels, batch items, sources being combined, etc.)
+  const CYCLE = [0x5eb4ff, 0xffcf56, 0x57d38c, 0xc792ea, 0xff7b7b, 0x66d9c9];
+
+  // =================================================================
+  // 1. SCENE FOUNDATION — every 3D visual starts here
+  // =================================================================
+  const _scenes = [];
+  let _loopStarted = false;
+  function _startLoop() {
+    if (_loopStarted) return;
+    _loopStarted = true;
+    (function loop() {
+      requestAnimationFrame(loop);
+      _scenes.forEach(function (s) {
+        const rect = s.container.getBoundingClientRect();
+        if (rect.bottom < -80 || rect.top > window.innerHeight + 80) return; // skip offscreen
+        if (s.autoRotate) s.group.rotation.y += 0.0022;
+        s.renderer.render(s.scene, s.camera);
+      });
+    })();
+  }
+
+  /**
+   * initScene3D(containerEl, opts) -> ctx
+   * Sets up scene/camera/renderer/lights/group in `containerEl`, wires
+   * drag-to-rotate + scroll-to-zoom, and registers it in the shared
+   * render loop. Every other builder in this toolkit is built on top
+   * of this. opts.autoRotate (default true) idles the group until the
+   * user drags it for the first time.
+   *
+   * Returns { scene, camera, renderer, group, dom, frame(maxDim),
+   *           enablePicking(getObjects, onPick) }
+   */
+  function initScene3D(containerEl, opts) {
+    opts = opts || {};
+    const width = containerEl.clientWidth || 300;
+    const height = containerEl.clientHeight || 250;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(38, width / height, 0.05, 500);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    containerEl.innerHTML = '';
+    containerEl.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+    const key = new THREE.DirectionalLight(0xffffff, 0.85);
+    key.position.set(6, 9, 7);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0x5eb4ff, 0.35);
+    rim.position.set(-6, -4, -6);
+    scene.add(rim);
+
+    const group = new THREE.Group();
+    scene.add(group);
+    group.rotation.x = -0.28;
+    group.rotation.y = 0.5;
+
+    let maxDim = 3;
+    function frame(md) {
+      maxDim = md || maxDim;
+      camera.position.set(maxDim * 1.15, maxDim * 0.9, maxDim * 1.5);
+      camera.near = maxDim * 0.05;
+      camera.far = maxDim * 30;
+      camera.updateProjectionMatrix();
+      camera.lookAt(0, 0, 0);
+    }
+    frame(maxDim);
+
+    let dragging = false, lastX = 0, lastY = 0, autoRotate = opts.autoRotate !== false;
+    const dom = renderer.domElement;
+    dom.style.touchAction = 'none';
+    dom.style.cursor = 'grab';
+    dom.addEventListener('pointerdown', function (e) {
+      dragging = true; autoRotate = false; lastX = e.clientX; lastY = e.clientY;
+      dom.style.cursor = 'grabbing';
+      try { dom.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    dom.addEventListener('pointerup', function () { dragging = false; dom.style.cursor = 'grab'; });
+    dom.addEventListener('pointerleave', function () { dragging = false; dom.style.cursor = 'grab'; });
+    dom.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      const dx = e.clientX - lastX, dy = e.clientY - lastY;
+      group.rotation.y += dx * 0.009;
+      group.rotation.x += dy * 0.009;
+      lastX = e.clientX; lastY = e.clientY;
+    });
+    dom.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      const dist = camera.position.length();
+      const nd = Math.max(maxDim * 0.5, Math.min(maxDim * 4, dist * (1 + e.deltaY * 0.0012)));
+      camera.position.setLength(nd);
+    }, { passive: false });
+
+    const raycaster = new THREE.Raycaster(), mouse = new THREE.Vector2();
+    function enablePicking(objectsGetter, onPick) {
+      dom.addEventListener('click', function (e) {
+        const rect = dom.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const hits = raycaster.intersectObjects(objectsGetter());
+        if (hits.length) onPick(hits[0].object);
+      });
+    }
+
+    const sceneObj = {
+      scene: scene, camera: camera, renderer: renderer, group: group, container: containerEl,
+      get autoRotate() { return autoRotate; }
+    };
+    _scenes.push(sceneObj);
+    _startLoop();
+
+    return { scene: scene, camera: camera, renderer: renderer, group: group, dom: dom, frame: frame, enablePicking: enablePicking };
+  }
+
+  function _clearGroup(group) {
+    for (let i = group.children.length - 1; i >= 0; i--) group.remove(group.children[i]);
+  }
+
+  // =================================================================
+  // 2. VOXEL TENSOR — rank 0–4 cube-grid, the core "block of numbers"
+  //    visual. Rank 3 colors each depth layer distinctly (think RGB
+  //    channels); rank 4 repeats a rank-3 block per batch item.
+  // =================================================================
+
+  /**
+   * buildVoxelTensor(ctx, shape, opts) -> { cubes, maxDim }
+   * Populates ctx.group with a voxel representation of `shape`
+   * (array of ints, length 0–4). Call on a fresh ctx or after
+   * _clearGroup(ctx.group) to rebuild.
+   *
+   * opts:
+   *   colorFn(idxArray) -> hex      per-cube color override
+   *   color: hex                    flat color for rank 0/1/2 (ignored if colorFn set)
+   *   uniformColor: bool            rank 3/4: use `color` for every cube instead of per-channel cycling
+   *   cap: int (default varies)     max cubes shown per axis (keeps scenes fast/legible)
+   */
+  function buildVoxelTensor(ctx, shape, opts) {
+    opts = opts || {};
+    _clearGroup(ctx.group);
+    const rank = shape.length;
+    const unit = 0.8, gap = 0.26, pitch = unit + gap;
+    const geo = new THREE.BoxGeometry(unit, unit, unit);
+    const edgesGeo = new THREE.EdgesGeometry(geo);
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0x090b10 });
+    const cubes = [];
+
+    function addCube(x, y, z, color, idx) {
+      const mat = new THREE.MeshStandardMaterial({ color: color, transparent: true, opacity: 0.9, roughness: 0.45, metalness: 0.08 });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(x, y, z);
+      mesh.add(new THREE.LineSegments(edgesGeo, edgeMat));
+      mesh.userData.idx = idx;
+      ctx.group.add(mesh);
+      cubes.push(mesh);
+    }
+
+    if (rank === 0) {
+      addCube(0, 0, 0, opts.color || 0xe7eaf2, []);
+    } else if (rank === 1) {
+      const n = Math.min(shape[0], opts.cap || 10);
+      for (let i = 0; i < n; i++) {
+        const c = opts.colorFn ? opts.colorFn([i]) : (opts.color || PALETTE.col);
+        addCube((i - (n - 1) / 2) * pitch, 0, 0, c, [i]);
+      }
+    } else if (rank === 2) {
+      const R = Math.min(shape[0], opts.cap || 8), C = Math.min(shape[1], opts.cap || 8);
+      for (let r = 0; r < R; r++) for (let c2 = 0; c2 < C; c2++) {
+        const x = (c2 - (C - 1) / 2) * pitch, y = ((R - 1) / 2 - r) * pitch;
+        const col = opts.colorFn ? opts.colorFn([r, c2]) : (opts.color || PALETTE.batch);
+        addCube(x, y, 0, col, [r, c2]);
+      }
+    } else if (rank === 3) {
+      const D = Math.min(shape[0], 6), R = Math.min(shape[1], 7), C = Math.min(shape[2], 7);
+      for (let d = 0; d < D; d++) {
+        const layerColor = opts.colorFn ? null : (opts.uniformColor ? (opts.color || PALETTE.batch) : CYCLE[d % CYCLE.length]);
+        for (let r = 0; r < R; r++) for (let c2 = 0; c2 < C; c2++) {
+          const x = (c2 - (C - 1) / 2) * pitch, y = ((R - 1) / 2 - r) * pitch, z = (d - (D - 1) / 2) * pitch;
+          const col = opts.colorFn ? opts.colorFn([d, r, c2]) : layerColor;
+          addCube(x, y, z, col, [d, r, c2]);
+        }
+      }
+    } else if (rank === 4) {
+      const N = Math.min(shape[0], 4), D = Math.min(shape[1], 4), R = Math.min(shape[2], 6), C = Math.min(shape[3], 6);
+      const blockW = C * pitch, batchGap = pitch * 2.0;
+      const totalW = N * blockW + (N - 1) * batchGap;
+      for (let n = 0; n < N; n++) {
+        const xOff = -totalW / 2 + n * (blockW + batchGap) + blockW / 2;
+        for (let d = 0; d < D; d++) {
+          const layerColor = CYCLE[d % CYCLE.length];
+          for (let r = 0; r < R; r++) for (let c2 = 0; c2 < C; c2++) {
+            const x = xOff + (c2 - (C - 1) / 2) * pitch, y = ((R - 1) / 2 - r) * pitch, z = (d - (D - 1) / 2) * pitch;
+            addCube(x, y, z, opts.colorFn ? opts.colorFn([n, d, r, c2]) : layerColor, [n, d, r, c2]);
+          }
+        }
+      }
+    }
+
+    const box = new THREE.Box3().setFromObject(ctx.group);
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z, 1.2);
+    ctx.frame(maxDim);
+    return { cubes: cubes, maxDim: maxDim };
+  }
+
+  /**
+   * createVoxelTensor(containerEl, shape, opts) -> { ctx, rebuild(shape,opts) }
+   * Convenience: initScene3D + buildVoxelTensor in one call, with a
+   * .rebuild() you can call from button handlers (rank-ladder toggles,
+   * "click a pipeline stage" demos, etc). opts.onPick(idxArray) fires
+   * on cube click.
+   */
+  function createVoxelTensor(containerEl, shape, opts) {
+    opts = opts || {};
+    const ctx = initScene3D(containerEl, { autoRotate: true });
+    let current = buildVoxelTensor(ctx, shape, opts);
+    if (opts.onPick) ctx.enablePicking(function () { return current.cubes; }, function (obj) { opts.onPick(obj.userData.idx); });
+    function rebuild(newShape, newOpts) { current = buildVoxelTensor(ctx, newShape, newOpts || opts); }
+    return { ctx: ctx, rebuild: rebuild };
+  }
+
+  // =================================================================
+  // 3. NETWORK GRAPH — neurons as spheres, weights as colored edges.
+  //    Edge color = weight sign, opacity = |weight| relative to the
+  //    biggest weight in the network. Neuron brightness = activation.
+  // =================================================================
+
+  /**
+   * createNetworkGraph3D(containerEl, layerSizes, weightsList, opts) -> { setActivations(vals) }
+   * layerSizes: e.g. [2,3,3,1]
+   * weightsList: array of matrices between consecutive layers; matrix
+   *   l has shape (layerSizes[l+1] x layerSizes[l]) — standard y=Wx form.
+   * setActivations(vals): vals is an array-of-arrays matching layerSizes,
+   *   each value in [0,1], to color neurons from dim to bright.
+   */
+  function createNetworkGraph3D(containerEl, layerSizes, weightsList, opts) {
+    opts = opts || {};
+    const ctx = initScene3D(containerEl, { autoRotate: true });
+    const layerGap = 3.0, neuronGap = 1.15;
+    const total = layerSizes.length;
+    const positions = [];
+    for (let l = 0; l < total; l++) {
+      const n = layerSizes[l];
+      const x = (l - (total - 1) / 2) * layerGap;
+      const arr = [];
+      for (let i = 0; i < n; i++) arr.push(new THREE.Vector3(x, ((n - 1) / 2 - i) * neuronGap, 0));
+      positions.push(arr);
+    }
+    let maxAbsW = 1e-6;
+    weightsList.forEach(function (W) { W.forEach(function (row) { row.forEach(function (w) { maxAbsW = Math.max(maxAbsW, Math.abs(w)); }); }); });
+    for (let l = 0; l < total - 1; l++) {
+      const W = weightsList[l];
+      for (let o = 0; o < layerSizes[l + 1]; o++) for (let i = 0; i < layerSizes[l]; i++) {
+        const w = W[o][i];
+        const geo = new THREE.BufferGeometry().setFromPoints([positions[l][i], positions[l + 1][o]]);
+        const color = w >= 0 ? PALETTE.batch : PALETTE.channel;
+        const opacity = Math.min(0.12 + (Math.abs(w) / maxAbsW) * 0.8, 0.95);
+        const mat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: opacity });
+        ctx.group.add(new THREE.Line(geo, mat));
+      }
+    }
+    const sphGeo = new THREE.SphereGeometry(0.27, 20, 20);
+    const neuronMeshes = [];
+    for (let l = 0; l < total; l++) for (let i = 0; i < layerSizes[l]; i++) {
+      const mat = new THREE.MeshStandardMaterial({ color: PALETTE.neutral, emissive: 0x000000, emissiveIntensity: 0.4, roughness: 0.4 });
+      const mesh = new THREE.Mesh(sphGeo, mat);
+      mesh.position.copy(positions[l][i]);
+      mesh.userData = { l: l, i: i };
+      ctx.group.add(mesh);
+      neuronMeshes.push(mesh);
+    }
+    ctx.frame(layerGap * total * 0.62);
+    if (opts.onPick) ctx.enablePicking(function () { return neuronMeshes; }, function (obj) { opts.onPick(obj.userData.l, obj.userData.i); });
+    function setActivations(vals) {
+      neuronMeshes.forEach(function (mesh) {
+        const a = Math.max(0, Math.min(1, vals[mesh.userData.l][mesh.userData.i]));
+        const col = new THREE.Color().lerpColors(new THREE.Color(PALETTE.neutral), new THREE.Color(PALETTE.batch), a);
+        mesh.material.color.copy(col);
+        mesh.material.emissive.copy(col);
+        mesh.material.emissiveIntensity = 0.15 + a * 0.65;
+      });
+    }
+    return { ctx: ctx, setActivations: setActivations };
+  }
+
+  // =================================================================
+  // 4. LOSS SURFACE — a 3D bowl for any 2-parameter function, with a
+  //    ball you can step downhill via numeric gradient descent. Works
+  //    for ANY lossFn(w1,w2) — no analytic gradient required.
+  // =================================================================
+
+  /**
+   * createLossSurface3D(containerEl, lossFn, opts) -> { step(lr), reset() }
+   * lossFn(w1,w2) -> number, evaluated on a grid to build the surface.
+   * opts: { domainHalf (default 9), start: [w1,w2], resolution (default 16) }
+   */
+  function createLossSurface3D(containerEl, lossFn, opts) {
+    opts = opts || {};
+    const ctx = initScene3D(containerEl, { autoRotate: true });
+    const size = opts.resolution || 16, half = opts.domainHalf || 9;
+    const scaleXY = 3.2 / size, scaleZ = 0.05;
+    const positions = [], colors = [], indices = [];
+    let maxZ = 1e-6;
+    for (let i = 0; i <= size; i++) for (let j = 0; j <= size; j++) {
+      maxZ = Math.max(maxZ, lossFn(-half + (2 * half * i) / size, -half + (2 * half * j) / size));
+    }
+    for (let i = 0; i <= size; i++) {
+      for (let j = 0; j <= size; j++) {
+        const w1 = -half + (2 * half * i) / size, w2 = -half + (2 * half * j) / size;
+        const z = lossFn(w1, w2);
+        positions.push(w1 * scaleXY, z * scaleZ, w2 * scaleXY);
+        const t = Math.min(1, z / maxZ);
+        const col = new THREE.Color().lerpColors(new THREE.Color(PALETTE.batch), new THREE.Color(PALETTE.channel), t);
+        colors.push(col.r, col.g, col.b);
+      }
+    }
+    for (let i = 0; i < size; i++) for (let j = 0; j < size; j++) {
+      const a = i * (size + 1) + j, b = a + 1, c = a + (size + 1), d = c + 1;
+      indices.push(a, c, b, b, c, d);
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setIndex(indices);
+    geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    geo.computeVertexNormals();
+    ctx.group.add(new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ vertexColors: true, side: THREE.DoubleSide, roughness: 0.75, transparent: true, opacity: 0.94 })));
+    ctx.group.add(new THREE.LineSegments(new THREE.WireframeGeometry(geo), new THREE.LineBasicMaterial({ color: 0x0a0d13, transparent: true, opacity: 0.22 })));
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(0.22, 20, 20), new THREE.MeshStandardMaterial({ color: PALETTE.col, emissive: PALETTE.col, emissiveIntensity: 0.5 }));
+    ctx.group.add(ball);
+
+    const start = opts.start || [-half * 0.7, -half * 0.72];
+    let w1 = start[0], w2 = start[1];
+    function place() {
+      const z = lossFn(w1, w2);
+      ball.position.set(w1 * scaleXY, z * scaleZ + 0.18, w2 * scaleXY);
+    }
+    place();
+    ctx.frame(half * scaleXY * 2.6);
+
+    function numGrad(eps) {
+      eps = eps || 1e-3;
+      const g1 = (lossFn(w1 + eps, w2) - lossFn(w1 - eps, w2)) / (2 * eps);
+      const g2 = (lossFn(w1, w2 + eps) - lossFn(w1, w2 - eps)) / (2 * eps);
+      return [g1, g2];
+    }
+    function step(lr) {
+      const g = numGrad();
+      w1 -= lr * g[0]; w2 -= lr * g[1];
+      place();
+      return { w1: w1, w2: w2, loss: lossFn(w1, w2) };
+    }
+    function reset() { w1 = start[0]; w2 = start[1]; place(); return { w1: w1, w2: w2, loss: lossFn(w1, w2) }; }
+    return { step: step, reset: reset };
+  }
+
+  // =================================================================
+  // 5. DOM GRID / STRIP HELPERS — for indexing, matmul, broadcasting,
+  //    sliding-window (conv/pool), or anything better shown flat than
+  //    in 3D. Pair with your own mouseenter wiring for linked-hover.
+  // =================================================================
+
+  function makeGrid(container, R, C, cellLabelFn) {
+    container.innerHTML = '';
+    container.style.setProperty('--cols', C);
+    const cells = [];
+    for (let r = 0; r < R; r++) {
+      const row = [];
+      for (let c = 0; c < C; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'dg-cell';
+        cell.textContent = cellLabelFn(r, c);
+        container.appendChild(cell);
+        row.push(cell);
+      }
+      cells.push(row);
+    }
+    return cells;
+  }
+  function flatCells(cells) {
+    const out = [];
+    for (let r = 0; r < cells.length; r++) for (let c = 0; c < cells[r].length; c++) out.push(cells[r][c]);
+    return out;
+  }
+  function clearHl(cells) { flatCells(cells).forEach(function (x) { x.classList.remove('hl'); x.classList.remove('active'); }); }
+
+  /** makeFlatStrip(container, values) -> DOM node array, one per value, class fs-cell */
+  function makeFlatStrip(container, values) {
+    container.innerHTML = '';
+    container.classList.add('flat-strip');
+    return values.map(function (v) {
+      const d = document.createElement('div');
+      d.className = 'fs-cell';
+      d.textContent = v;
+      container.appendChild(d);
+      return d;
+    });
+  }
+
+  // =================================================================
+  // 6. 2D FUNCTION PLOTTER — activation curves, loss-vs-epoch, any
+  //    f(x). Auto-ranges the y-axis by sampling. Hover shows live
+  //    (x, f(x)); a pinned marker shows one fixed point of interest.
+  // =================================================================
+
+  /**
+   * plotFunction2D(svgEl, fnsMap, opts) -> { setKey(key), setPin(x), redraw() }
+   * fnsMap: { sigmoid: x=>..., tanh: x=>..., relu: x=>... }
+   * opts: { xMin(-6), xMax(6), initialKey, pinX }
+   */
+  function plotFunction2D(svgEl, fnsMap, opts) {
+    opts = opts || {};
+    const W = 400, H = 200, pad = 28;
+    const xMin = opts.xMin != null ? opts.xMin : -6, xMax = opts.xMax != null ? opts.xMax : 6;
+    let currentKey = opts.initialKey || Object.keys(fnsMap)[0];
+    let pinX = opts.pinX != null ? opts.pinX : 0;
+
+    function sampleRange(key) {
+      let lo = Infinity, hi = -Infinity;
+      for (let i = 0; i <= 60; i++) {
+        const x = xMin + (xMax - xMin) * i / 60;
+        const y = fnsMap[key](x);
+        if (y < lo) lo = y; if (y > hi) hi = y;
+      }
+      const pad2 = (hi - lo) * 0.12 || 1;
+      return [lo - pad2, hi + pad2];
+    }
+    function xPx(x) { return pad + (x - xMin) / (xMax - xMin) * (W - 2 * pad); }
+    function yPx(y, r) { return H - pad - (y - r[0]) / (r[1] - r[0]) * (H - 2 * pad); }
+
+    function redraw() {
+      const fn = fnsMap[currentKey];
+      const r = sampleRange(currentKey);
+      let d = '';
+      for (let i = 0; i <= 100; i++) {
+        const x = xMin + (xMax - xMin) * i / 100;
+        const px = xPx(x), py = yPx(fn(x), r);
+        d += (i === 0 ? 'M' : 'L') + px.toFixed(1) + ' ' + py.toFixed(1) + ' ';
+      }
+      const zx = xPx(pinX), zy = yPx(fn(pinX), r);
+      svgEl.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svgEl.innerHTML =
+        '<line x1="' + pad + '" y1="' + (H - pad) + '" x2="' + (W - pad) + '" y2="' + (H - pad) + '" stroke="#262e42"/>' +
+        '<line x1="' + xPx(0) + '" y1="' + pad + '" x2="' + xPx(0) + '" y2="' + (H - pad) + '" stroke="#262e42"/>' +
+        '<path d="' + d + '" fill="none" stroke="#5eb4ff" stroke-width="2.5"/>' +
+        '<circle cx="' + zx + '" cy="' + zy + '" r="5.5" fill="#c792ea"/>' +
+        '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="transparent" class="mc-plot-overlay"/>' +
+        '<circle cx="-10" cy="-10" r="4" fill="#57d38c" class="mc-plot-hoverdot" style="display:none;"/>';
+      const overlay = svgEl.querySelector('.mc-plot-overlay');
+      const hoverDot = svgEl.querySelector('.mc-plot-hoverdot');
+      overlay.addEventListener('mousemove', function (e) {
+        const rect = svgEl.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width * W;
+        const x = xMin + (px - pad) / (W - 2 * pad) * (xMax - xMin);
+        if (x < xMin || x > xMax) return;
+        hoverDot.style.display = 'block';
+        hoverDot.setAttribute('cx', xPx(x)); hoverDot.setAttribute('cy', yPx(fn(x), r));
+        if (opts.onHover) opts.onHover(currentKey, x, fn(x));
+      });
+      overlay.addEventListener('mouseleave', function () {
+        hoverDot.style.display = 'none';
+        if (opts.onLeave) opts.onLeave(currentKey, pinX, fn(pinX));
+      });
+      if (opts.onLeave) opts.onLeave(currentKey, pinX, fn(pinX));
+    }
+    function setKey(key) { currentKey = key; redraw(); }
+    function setPin(x) { pinX = x; redraw(); }
+    redraw();
+    return { setKey: setKey, setPin: setPin, redraw: redraw };
+  }
+
+  // =================================================================
+  // 7. MATH UTILS — small, dependency-free helpers for math-heavy
+  //    lessons. Use these (or python/node, see SKILL.md) to COMPUTE
+  //    every number before you write it into the page.
+  // =================================================================
+  function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+  function relu(v) { return Array.isArray(v) ? v.map(function (x) { return Math.max(0, x); }) : Math.max(0, v); }
+  function matVec(W, x) { return W.map(function (row) { return row.reduce(function (s, w, i) { return s + w * x[i]; }, 0); }); }
+  function matMat(A, B) {
+    const p = A.length, q = B.length, r = B[0].length, R = [];
+    for (let i = 0; i < p; i++) { R.push([]); for (let j = 0; j < r; j++) { let s = 0; for (let k = 0; k < q; k++) s += A[i][k] * B[k][j]; R[i].push(s); } }
+    return R;
+  }
+  function fmtVec(v) { return '[' + v.map(function (n) { return n.toFixed(2); }).join(', ') + ']'; }
+  function fmtMat(M) { return M.map(function (r) { return '[' + r.map(function (n) { return n.toFixed(2); }).join(', ') + ']'; }).join('\n           '); }
+
+  function sanitizeMathFormulas(rootEl) {
+    const root = rootEl || (typeof document !== "undefined" ? document.body : null);
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    const latexTKeywords = ["ext", "heta", "anh", "au", "imes", "ilde", "op", "riangle", "o"];
+    while ((node = walker.nextNode())) {
+      let val = node.nodeValue;
+      if (!val || (!val.includes("$") && !/[\x07\x08\x0c\x0d\x09]/.test(val))) continue;
+      
+      val = val.replace(/\x07/g, "\\a")
+               .replace(/\x08/g, "\\b")
+               .replace(/\x0c/g, "\\f")
+               .replace(/\x0d/g, "\\r");
+      
+      for (let i = 0; i < latexTKeywords.length; i++) {
+        const tw = latexTKeywords[i];
+        val = val.replace(new RegExp("\\t" + tw, "g"), "\\" + "t" + tw);
+      }
+      
+      val = val.replace(/\n\s*ight(\]||\)|\\|\s|\$)/g, " \\right$1");
+      
+      if (val !== node.nodeValue) {
+        node.nodeValue = val;
+      }
+    }
+  }
+
+  function resizeAll() {
+    _scenes.forEach(function (s) {
+      const w = s.container.clientWidth || 300, h = s.container.clientHeight || 250;
+      s.camera.aspect = w / h;
+      s.camera.updateProjectionMatrix();
+      s.renderer.setSize(w, h);
+    });
+  }
+
+  // =================================================================
+  return {
+    PALETTE: PALETTE, CYCLE: CYCLE,
+    initScene3D: initScene3D,
+    buildVoxelTensor: buildVoxelTensor,
+    createVoxelTensor: createVoxelTensor,
+    createNetworkGraph3D: createNetworkGraph3D,
+    createLossSurface3D: createLossSurface3D,
+    makeGrid: makeGrid, flatCells: flatCells, clearHl: clearHl, makeFlatStrip: makeFlatStrip,
+    plotFunction2D: plotFunction2D,
+    sigmoid: sigmoid, relu: relu, matVec: matVec, matMat: matMat, fmtVec: fmtVec, fmtMat: fmtMat, sanitizeMathFormulas: sanitizeMathFormulas,
+    resizeAll: resizeAll
+  };
+})();
+
+// Resize handling: keep every registered scene sized to its container.
+window.addEventListener('resize', function () {
+  clearTimeout(window.__mcResizeTO);
+  window.__mcResizeTO = setTimeout(function () { MC.resizeAll(); }, 150);
+});
+
+
+/* ============ then all lesson-specific widget code goes below ============ */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Helper for UI tabs
+  window.showIsComponent = function(name, btn) {
+    document.querySelectorAll('#is-components .chip').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    const desc = {
+      'Hardware': 'Physical devices (servers, phones, computers) that run the system.',
+      'Software': 'Instructions that tell hardware what to do (OS, applications).',
+      'Databases': 'Collections of related data stored in a structured way.',
+      'Networks': 'Connections allowing hardware to communicate (Internet, LAN).',
+      'Procedures': 'Rules and guidelines for people using the system.'
+    };
+    document.getElementById('is-caption').textContent = desc[name];
+  };
+
+  window.showSdlcPhase = function(idx, btn) {
+    document.querySelectorAll('.pipeline .stage').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const details = [
+      { title: 'Planning: Why should we build this system?', items: ['Identify business value', 'Analyze feasibility (Tech, Econ, Org)', 'Develop workplan'], deliv: 'System Request & Project Plan → Go/No-Go Decision' },
+      { title: 'Analysis: Who uses it, What will it do, Where/When?', items: ['Gather requirements', 'Process modeling', 'Data modeling'], deliv: 'System Proposal → Go/No-Go Decision' },
+      { title: 'Design: How will we build it?', items: ['Architecture design', 'UI/UX design', 'Database & file specs', 'Program design'], deliv: 'System Specification → Go/No-Go Decision' },
+      { title: 'Implementation: Delivery and support', items: ['Construction (Coding)', 'Testing (Unit, Integration, Sys)', 'Installation & Training', 'Support plan'], deliv: 'Completed System & Documentation' }
+    ];
+    
+    const d = details[idx];
+    let html = '<div style="font-weight: 600; color: var(--c-batch); font-size: 16px; margin-bottom: 10px;">' + d.title + '</div>';
+    html += '<ul style="color: var(--text-dim); margin-top: 0; padding-left: 20px; font-size: 14px;">';
+    d.items.forEach(i => html += '<li>' + i + '</li>');
+    html += '</ul>';
+    html += '<div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); margin-top: 10px;">Deliverable: ' + d.deliv + '</div>';
+    
+    document.getElementById('sdlc-details').innerHTML = html;
+  };
+
+  window.showMethodology = function(name, btn) {
+    document.querySelectorAll('#method-details').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.viz-controls .chip').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const meth = {
+      'Waterfall': { desc: 'Sequential phases. You cannot move to next phase until current is complete.', pros: 'Clear requirements, rigorous documentation.', cons: 'Inflexible, long time before user sees anything.' },
+      'RAD': { desc: 'Rapid Application Development. Fast delivery of parts of system.', pros: 'Users get system quickly, easy to refine.', cons: 'Managing user expectations, scope creep.' },
+      'Agile': { desc: 'Iterative, incremental delivery (e.g., Scrum). Focus on working software over docs.', pros: 'Highly flexible, fast feedback loop.', cons: 'Requires dedicated users, hard for large teams.' },
+      'DevOps': { desc: 'Integrates Dev and Ops for continuous delivery.', pros: 'Fast deployments, high reliability, automated.', cons: 'Cultural shift needed, complex tooling.' }
+    };
+    
+    const d = meth[name];
+    let html = '<div style="font-weight: 600; color: var(--c-batch);">' + name + '</div>';
+    html += '<p style="color: var(--text-dim); margin-bottom: 10px;">' + d.desc + '</p>';
+    html += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 13.5px;">';
+    html += '<div><b style="color: var(--c-row);">Pros:</b> ' + d.pros + '</div>';
+    html += '<div><b style="color: var(--c-channel);">Cons:</b> ' + d.cons + '</div>';
+    html += '</div>';
+    
+    document.getElementById('method-details').innerHTML = html;
+  };
+
+  // ---- Part 6: Cost-Benefit Table ----
+  (function () {
+    const headers = ['Year', '0', '1', '2', '3'];
+    const costs = [1600000, 400000, 420000, 441000]; // Development is Y0, ops are Y1-3
+    const benefits = [0, 500000, 605000, 733000];
+    const rate = 0.06;
+    
+    // PV Calcs
+    const pvCosts = costs.map((c, i) => Math.round(c / Math.pow(1+rate, i)));
+    const pvBens = benefits.map((b, i) => Math.round(b / Math.pow(1+rate, i)));
+    
+    const tableData = [
+      headers,
+      ['Total Benefits'].concat(benefits.map(x => '$' + x.toLocaleString())),
+      ['PV of Benefits'].concat(pvBens.map(x => '$' + x.toLocaleString())),
+      ['Total Costs'].concat(costs.map(x => '$' + x.toLocaleString())),
+      ['PV of Costs'].concat(pvCosts.map(x => '$' + x.toLocaleString()))
+    ];
+    
+    const cells = MC.makeGrid(document.getElementById('cb-table'), 5, 5, function(r, c) {
+      return tableData[r][c];
+    });
+    
+    // Style headers
+    for(let i=0; i<5; i++) cells[0][i].classList.add('col-header');
+    for(let i=1; i<5; i++) cells[i][0].classList.add('row-header');
+    
+    const formulaEl = document.getElementById('cb-formula');
+    
+    for (let r = 1; r < 5; r++) {
+      for (let c = 1; c < 5; c++) {
+        cells[r][c].addEventListener('mouseenter', function (r, c) {
+          return function () {
+            MC.clearHl(cells);
+            for(let i=0; i<5; i++) cells[0][i].classList.add('col-header');
+            for(let i=1; i<5; i++) cells[i][0].classList.add('row-header');
+            
+            for(let k=1; k<5; k++) cells[r][k].classList.add('hl');
+            cells[r][c].classList.add('active');
+            
+            if (r === 2 || r === 4) { // PV rows
+               const raw = (r===2) ? benefits[c] : costs[c];
+               const pv = (r===2) ? pvBens[c] : pvCosts[c];
+               formulaEl.innerHTML = `$$PV = \frac{${raw.toLocaleString()}}{(1+0.06)^${c}} = \$${pv.toLocaleString()}$$`;
+               MC.sanitizeMathFormulas(formulaEl);
+               renderMathInElement(formulaEl, { delimiters: [{ left: '$$', right: '$$', display: true }] });
+            } else {
+               formulaEl.textContent = 'Hover a PV row to see the math.';
+            }
+          };
+        }(r, c));
+      }
+    }
+  })();
+
+  // ---- KaTeX render ----
+  MC.sanitizeMathFormulas(document.body);
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }] });
+  }
+});
+</script>
+</body>
+</html>
