@@ -51,52 +51,51 @@ Look at how the flow crosses the swimlane boundaries. This perfectly illustrates
 
 ```mermaid
 graph TD
-    Start((start)) --> A1
-    
-    A1(["Agent: Send book proposal to Editor"])
-    A2(["Agent: Receive rejection notification"])
-    A3(["Agent: Offer contract to Writer"])
-    A4(["Agent: Discuss contract opinion with Writer"])
-    
-    S1(["Editor: Log into app"])
-    S2(["Editor: Review book proposal"])
-    D_Sarah{"Accept or Reject?"}
-    S3(["Editor: Receive acceptance notification"])
-    
-    W1(["Writer: Analyze contract offer"])
-    W2(["Writer: Ask Agent's opinion"])
-    D_Both{"Both positive?"}
-    W3(["Writer: Notify Editor of acceptance"])
-    W4(["Writer: Begin writing"])
-    
-    %% Agent starts by sending proposal
+    subgraph Agent [Agent]
+        direction TB
+        Start((start))
+        A1([Send book proposal to Editor])
+        A2([Receive rejection notification])
+        End1(((end)))
+        A3([Offer contract to Writer])
+        A4([Discuss contract opinion with Writer])
+    end
+
+    subgraph Editor [Editor]
+        direction TB
+        S1([Log into app])
+        S2([Review book proposal])
+        D_Sarah{Accept or Reject?}
+        S3([Receive acceptance notification])
+    end
+
+    subgraph Writer [Writer]
+        direction TB
+        W1([Analyze contract offer])
+        W2([Ask Agent's opinion])
+        D_Both{Both positive?}
+        W3([Notify Editor of acceptance])
+        W4([Begin writing])
+        End2(((end)))
+        End3(((end)))
+    end
+
+    Start --> A1
     A1 --> S1
-    
-    %% Sarah's process
     S1 --> S2
     S2 --> D_Sarah
-    
-    %% Rejection Path
     D_Sarah -->|Reject| A2
-    A2 --> End1((end))
-    
-    %% Acceptance Path
+    A2 --> End1
     D_Sarah -->|Accept| A3
-    
-    %% Contract Negotiation
     A3 --> W1
     W1 --> W2
     W2 --> A4
     A4 --> D_Both
-    
-    %% Final Decision
     D_Both -->|Yes| W3
     W3 --> S3
     W3 --> W4
-    W4 --> End2((end))
-    
-    %% If not positive, it ends (implied)
-    D_Both -->|No| End3((end))
+    W4 --> End2
+    D_Both -->|No| End3
 ```
 
 ## Step 5: Self-Check

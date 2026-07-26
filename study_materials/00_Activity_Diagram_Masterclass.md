@@ -212,27 +212,50 @@ We have three actors: Customer, Barista, Machine. Let's arrange them and place t
 
 ```mermaid
 graph TD
-    Start((Start)) --> Order([Customer: Order Coffee])
+    subgraph Customer
+        direction TB
+        Start((Start))
+        Order([Order Coffee])
+        Receive([Receive Drink])
+        End(((End)))
+    end
+    
+    subgraph Barista
+        direction TB
+        Check{Hot or Cold?}
+        Fork[/ Fork /]
+        Steam([Steam Milk])
+        Blend([Blend Ice])
+        Join[\ Join \]
+        Merge{Merge}
+        Serve([Serve Drink])
+    end
+    
+    subgraph Machine
+        direction TB
+        Brew([Brew Espresso])
+    end
 
-    Order --> Check{Hot or Cold?}
+    Start --> Order
+    Order --> Check
 
     %% ── Hot Path (Parallel) ──
-    Check -->|Hot| Fork[/ Fork /]
-    Fork --> Steam([Barista: Steam Milk])
-    Fork --> Brew([Machine: Brew Espresso])
-    Steam --> Join[\ Join \]
+    Check -->|Hot| Fork
+    Fork --> Steam
+    Fork --> Brew
+    Steam --> Join
     Brew --> Join
 
     %% ── Cold Path ──
-    Check -->|Cold| Blend([Barista: Blend Ice])
+    Check -->|Cold| Blend
 
     %% ── Merge both paths ──
-    Join --> Merge{Merge}
+    Join --> Merge
     Blend --> Merge
 
-    Merge --> Serve([Barista: Serve Drink])
-    Serve --> Receive([Customer: Receive Drink])
-    Receive --> End(((End)))
+    Merge --> Serve
+    Serve --> Receive
+    Receive --> End
 ```
 
 > **💡 Reading the Diagram:** Notice how the **Fork** splits into two parallel tasks (Steam Milk + Brew Espresso), and the **Join** waits for both to finish before merging with the Cold path. The **Merge** node then brings the Hot and Cold branches together into a single flow toward Serve.

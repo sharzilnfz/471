@@ -56,39 +56,48 @@ Here is how our logical flow looks in a Mermaid diagram. Notice how the swimlane
 
 ```mermaid
 graph TD
-    Start((start)) --> SR1
+    subgraph Sales_Representative [Sales Representative]
+        direction TB
+        Start((start))
+        SR1([Place new order])
+        SR2([Receive letter])
+        End1(((end)))
+    end
     
-    SR1(["Sales Representative: Place new order"])
-    SR2(["Sales Representative: Receive letter"])
+    subgraph System_Production [System/Production]
+        direction TB
+        D1{Special materials required?}
+        P1([Add order to production list])
+        P2([Schedule for production])
+        P3([Confirm order])
+        F1[/ Fork /]
+    end
     
-    D1{"Special materials required?"}
-    P1(["System/Production: Add order to production list"])
-    P2(["System/Production: Schedule for production"])
-    P3(["System/Production: Confirm order"])
-    F1[/ Fork /]
+    subgraph Supplier [Supplier]
+        direction TB
+        SUP1([Receive order for special materials])
+        SUP2([Provide special materials])
+    end
     
-    SUP1(["Supplier: Receive order for special materials"])
-    SUP2(["Supplier: Provide special materials"])
+    subgraph Manager [Manager]
+        direction TB
+        M1([Receive letter])
+        End2(((end)))
+    end
     
-    M1(["Manager: Receive letter"])
-    
+    Start --> SR1
     SR1 --> D1
-    
     D1 -->|Yes| SUP1
     SUP1 --> SUP2
     SUP2 --> P1
-    
     D1 -->|No| P1
-    
     P1 --> P2
     P2 --> P3
     P3 --> F1
-    
     F1 --> SR2
     F1 --> M1
-    
-    SR2 --> End1((end))
-    M1 --> End2((end))
+    SR2 --> End1
+    M1 --> End2
 ```
 
 ## Step 5: Self-Check
